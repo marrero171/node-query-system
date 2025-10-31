@@ -1,3 +1,4 @@
+@tool
 class_name GridShape extends Generator
 
 @export_group("Generator")
