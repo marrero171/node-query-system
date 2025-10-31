@@ -109,4 +109,4 @@ libraries = {
 }
 
 [node name="Enemy" parent="." instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9117794, 3.9108214, 8.560383)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9782453, 2.0774522, 5.9718285)

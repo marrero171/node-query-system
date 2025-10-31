@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/geqs/plugin.cfg")
+enabled=PackedStringArray("res://addons/geqs/plugin.cfg", "res://addons/node_query_system/plugin.cfg")
 
 [global_group]
 

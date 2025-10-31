@@ -8,6 +8,9 @@ extends Generator
 
 @export_range(0.0, 360.0, 0.5) var arc_angle: float = 360.0
 
+@export_group("Cast Data")
+@export var use_casting: bool = true
+
 @export_group("Projection Data")
 @export var use_vertical_projection: bool = false
 @export var project_down: float = 100.0
@@ -28,11 +31,19 @@ func get_generation() -> Array[GEQSProjection]:
 			var pos_z = sin(previous_angle) * circle_radius + starting_pos.z
 
 			previous_angle += angle_step
+			
+			var final_pos = Vector3(pos_x, starting_pos.y, pos_z)
+			if use_casting:
+				var casted_ray: Dictionary = cast_ray_projection(starting_pos, final_pos, contexts)
+				if casted_ray:
+					final_pos = casted_ray.position
+				
+
 			if not use_vertical_projection:
-				final_result.append(GEQSProjection.new(Vector3(pos_x, starting_pos.y, pos_z)))
+				final_result.append(GEQSProjection.new(final_pos))
 				continue
 		
-			var ray_pos: Vector3 = Vector3(pos_x, starting_pos.y, pos_z)
+			var ray_pos: Vector3 = final_pos
 			
 			var ray_result: Dictionary = cast_ray_projection(ray_pos + Vector3.UP * project_up, ray_pos + Vector3.DOWN * project_down, contexts)
 			

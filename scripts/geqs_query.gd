@@ -2,6 +2,8 @@
 class_name GEQSQuery
 extends Node
 
+signal query_finished(result: QueryResult)
+
 @export var use_debug_shapes: bool = false
 @export var debug_color: Gradient
 
@@ -28,6 +30,7 @@ func request_query():
 		
 		if use_debug_shapes:
 			draw_debug(projection)
+	query_finished.emit(QueryResult.new(gen_result))
 
 
 # DEBUG PURPOSE
@@ -81,3 +84,18 @@ func _get_configuration_warnings() -> PackedStringArray:
 		result.append("Query may have only one Generator child at a time.")
 
 	return result
+
+class QueryResult extends RefCounted:
+	var projections: Array[GEQSProjection]
+	func _init(val: Array[GEQSProjection]):
+		projections = val
+		
+	func get_highest_score():
+		var highest: float
+		for p: GEQSProjection in projections:
+			if highest == null:
+				highest = p.score
+			else:
+				if p.score > highest:
+					highest = p.score
+		return highest
