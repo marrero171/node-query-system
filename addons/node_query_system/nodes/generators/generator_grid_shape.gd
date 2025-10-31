@@ -11,10 +11,9 @@ class_name GridShape extends Generator
 @export var project_up: float = 100.0
 @export var post_projection_vertical_offset: float = 0.0
 
-func get_generation() -> Array[QueryItem]:
+func perform_generation(query_item_list: Array[QueryItem]) -> void:
 	var grid_size: int = roundi(grid_half_size * 2 / space_between) + 1
 	var contexts: Array[Node3D] = generate_around.get_context()
-	var final_result: Array[QueryItem] = []
 
 	for context: Node3D in contexts:
 		var starting_pos = context.global_position
@@ -26,15 +25,19 @@ func get_generation() -> Array[QueryItem]:
 				var pos_z: float = starting_pos.z + (z * space_between)
 
 				if not use_vertical_projection:
-					final_result.append(QueryItem.new(Vector3(pos_x, context.global_position.y, pos_z)))
+					query_item_list.append(QueryItem.new(Vector3(pos_x, context.global_position.y, pos_z)))
 					continue
 
 				var ray_pos: Vector3 = Vector3(pos_x, starting_pos.y, pos_z)
 				
 				var ray_result: Dictionary = cast_ray_projection(ray_pos + (Vector3.UP * project_up), ray_pos + (Vector3.DOWN * project_down), contexts)
 				if ray_result:
-					final_result.append(QueryItem.new(ray_result.position + Vector3.UP * post_projection_vertical_offset, ray_result.collider))
-	return final_result
+					query_item_list.append(QueryItem.new(ray_result.position + Vector3.UP * post_projection_vertical_offset, ray_result.collider))
+	
+	for test: QueryTest in get_children():
+		for query_item: QueryItem in query_item_list:
+			if !query_item.is_filtered:
+				test.perform_test(query_item)
 
 
 func cast_ray_projection(start_pos: Vector3, end_pos: Vector3, exclusions: Array) -> Dictionary:

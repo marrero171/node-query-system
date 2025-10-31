@@ -17,9 +17,8 @@ extends Generator
 @export var project_up: float = 100.0
 @export var post_projection_vertical_offset: float = 0.0
 
-func get_generation() -> Array[QueryItem]:
+func perform_generation(query_items_list: Array[QueryItem]) -> void:
 	var contexts: Array[Node3D] = circle_center.get_context()
-	var final_result: Array[QueryItem] = []
 	var points_amount: int = roundi(circle_radius / space_between)
 
 	for context: Node3D in contexts:
@@ -40,7 +39,7 @@ func get_generation() -> Array[QueryItem]:
 				
 
 			if not use_vertical_projection:
-				final_result.append(QueryItem.new(final_pos))
+				query_items_list.append(QueryItem.new(final_pos))
 				continue
 		
 			var ray_pos: Vector3 = final_pos
@@ -48,9 +47,7 @@ func get_generation() -> Array[QueryItem]:
 			var ray_result: Dictionary = cast_ray_projection(ray_pos + Vector3.UP * project_up, ray_pos + Vector3.DOWN * project_down, contexts)
 			
 			if ray_result:
-				final_result.append(QueryItem.new(ray_result.position + Vector3.UP * post_projection_vertical_offset, ray_result.collider))
-		
-	return final_result
+				query_items_list.append(QueryItem.new(ray_result.position + Vector3.UP * post_projection_vertical_offset, ray_result.collider))
 
 
 func cast_ray_projection(start_pos: Vector3, end_pos: Vector3, exclusions: Array) -> Dictionary:

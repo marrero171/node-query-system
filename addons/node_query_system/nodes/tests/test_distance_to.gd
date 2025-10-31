@@ -8,6 +8,14 @@ extends QueryTest
 
 @export_group("Score")
 @export var scoring_curve: Curve
+
+func _ready() -> void:
+	if scoring_curve == null:
+		scoring_curve = Curve.new()
+		scoring_curve.add_point(Vector2.ZERO)
+		scoring_curve.add_point(Vector2(1, 1))
+	scoring_curve.bake()
+
 func perform_test(projection: QueryItem):
 	var context_nodes: Array[Node3D] = distance_to.get_context()
 	var scores: Array[float] = []
@@ -16,7 +24,7 @@ func perform_test(projection: QueryItem):
 		var distance: float = projection.projection_position.distance_to(node.global_position)
 		
 		var linear_score: float = clamp(distance / max_distance, 0.0, 1.0)
-		var curve_score: float = scoring_curve.sample(linear_score)
+		var curve_score: float = scoring_curve.sample_baked(linear_score)
 
 		scores.append(curve_score)
 	

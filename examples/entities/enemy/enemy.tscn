@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://nvso64245ltb"]
+[gd_scene load_steps=14 format=3 uid="uid://nvso64245ltb"]
 
 [ext_resource type="Script" uid="uid://cyqo7rh6dj286" path="res://examples/entities/enemy/enemy.gd" id="1_3fvr7"]
 [ext_resource type="Script" uid="uid://dpf3gdda0hw3d" path="res://addons/node_query_system/environment_query.gd" id="2_dt443"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://btm8tt22wulwi" path="res://addons/node_query_system/nodes/tests/test_distance_to.gd" id="5_721x4"]
 [ext_resource type="Script" uid="uid://d1q6i40l8gvoi" path="res://addons/node_query_system/nodes/tests/test_raycast_to.gd" id="6_721x4"]
 [ext_resource type="Script" uid="uid://bvvrmnqi0eyge" path="res://addons/node_query_system/nodes/contexts/context_in_group.gd" id="6_d50e0"]
+[ext_resource type="Script" uid="uid://c0cw0j1gv0ytb" path="res://addons/node_query_system/nodes/generators/generator_circle_shape.gd" id="7_a8xr0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_036b0"]
 
@@ -36,8 +37,18 @@ use_debug_shapes = true
 debug_color = ExtResource("3_4wwj3")
 metadata/_custom_type_script = "uid://dpf3gdda0hw3d"
 
+[node name="CircleShape" type="Node3D" parent="EnvironmentQuery" node_paths=PackedStringArray("circle_center")]
+script = ExtResource("7_a8xr0")
+circle_center = NodePath("../../Contexts/ContextPlayer")
+circle_radius = 5.0
+space_between = 0.5
+use_vertical_projection = true
+post_projection_vertical_offset = 2.5
+metadata/_custom_type_script = "uid://c0cw0j1gv0ytb"
+
 [node name="GridShape" type="Node3D" parent="EnvironmentQuery" node_paths=PackedStringArray("generate_around")]
 script = ExtResource("4_d50e0")
+grid_half_size = 5.0
 space_between = 2.0
 generate_around = NodePath("../../Contexts/ContextSelf")
 post_projection_vertical_offset = 1.5
