@@ -1,5 +1,5 @@
 class_name TestRaycastTo
-extends GEQSTest
+extends QueryTest
 
 @export var context: QueryContext
 ## Start raycast from context's position instead

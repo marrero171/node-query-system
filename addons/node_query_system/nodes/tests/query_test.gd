@@ -1,5 +1,5 @@
 @abstract
-class_name GEQSTest
+class_name QueryTest
 extends Node3D
 
 enum TestPurpose {FILTER_SCORE, FILTER_ONLY, SCORE_ONLY}

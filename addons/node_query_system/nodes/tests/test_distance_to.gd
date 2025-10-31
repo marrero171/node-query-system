@@ -1,5 +1,5 @@
 class_name TestDistanceTo
-extends GEQSTest
+extends QueryTest
 
 
 @export var distance_to: QueryContext
