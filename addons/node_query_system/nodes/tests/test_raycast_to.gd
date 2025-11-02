@@ -2,8 +2,9 @@ class_name TestRaycastTo
 extends QueryTest
 
 @export var context: QueryContext
-## Start raycast from context's position instead
+## Whether hitting results in a positive value
 @export var hitting_is_true: bool = true
+## Start raycast from context's position instead
 @export var cast_from_context: bool = false
 @export var exclusions: Array[Node3D]
 @export_flags_3d_physics var collision_mask: int = 1
@@ -33,12 +34,28 @@ func perform_test(projection: QueryItem):
 
 	var result = space_state.intersect_ray(query)
 	
+	var got_hit: bool = false
 	if result.get("collider") == context_nodes[0]:
-		match test_purpose:
-			TestPurpose.FILTER_SCORE:
-				projection.add_score(1 if hitting_is_true else 0)
-				projection.is_filtered = true if hitting_is_true else false
-			TestPurpose.FILTER_ONLY:
-				projection.is_filtered = true if hitting_is_true else false
-			TestPurpose.SCORE_ONLY:
-				projection.add_score(1 if hitting_is_true else 0)
+		got_hit = true
+		print_debug(context_nodes[0], " hit!")
+		
+	var filter: bool
+	var score = 0.0
+
+	if got_hit:
+		filter = false if hitting_is_true else true
+		score = 1.0 if hitting_is_true else 0.0
+	else:
+		filter = true if hitting_is_true else false
+		score = 0.0 if hitting_is_true else 1.0
+		
+
+	match test_purpose:
+		TestPurpose.FILTER_SCORE:
+			projection.is_filtered = filter
+			if !projection.is_filtered:
+				projection.add_score(score)
+		TestPurpose.FILTER_ONLY:
+			projection.is_filtered = filter
+		TestPurpose.SCORE_ONLY:
+			projection.add_score(score)
