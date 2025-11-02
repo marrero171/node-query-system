@@ -1,5 +1,6 @@
 ## Performs tests on a QueryItem, it can be a variety of operations, such as getting the distance between the Item and the context, or casting a ray to the context.
 @abstract
+@icon("../../icons/query_test3d.svg")
 class_name QueryTest
 extends Node3D
 
