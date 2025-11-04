@@ -1,3 +1,4 @@
+@icon("../../icons/distance_test3d.svg")
 class_name TestDistanceTo
 extends QueryTest
 

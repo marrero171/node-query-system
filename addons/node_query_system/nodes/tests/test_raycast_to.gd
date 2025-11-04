@@ -1,3 +1,4 @@
+@icon("../../icons/raycast_test3d.svg")
 class_name TestRaycastTo
 extends QueryTest
 
