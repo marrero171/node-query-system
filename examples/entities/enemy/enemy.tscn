@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://nvso64245ltb"]
+[gd_scene load_steps=13 format=3 uid="uid://nvso64245ltb"]
 
 [ext_resource type="Script" uid="uid://cyqo7rh6dj286" path="res://examples/entities/enemy/enemy.gd" id="1_3fvr7"]
 [ext_resource type="Script" uid="uid://dpf3gdda0hw3d" path="res://addons/node_query_system/environment_query.gd" id="2_dt443"]
@@ -20,8 +20,6 @@ point_count = 3
 [sub_resource type="Curve" id="Curve_5bnyk"]
 _data = [Vector2(0, 1), 0.0, -0.9765681, 0, 1, Vector2(0.503876, 0.5079308), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.0237981, 0.0, 1, 0]
 point_count = 3
-
-[sub_resource type="Curve" id="Curve_a8xr0"]
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
@@ -89,22 +87,5 @@ target_positions = Array[Vector3]([Vector3(5, 0.5, 0)])
 metadata/_custom_type_script = "uid://ddjx0xky8ewx3"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="EnvironmentQuery11" type="Node" parent="."]
-script = ExtResource("2_dt443")
-use_debug_shapes = true
-metadata/_custom_type_script = "uid://dpf3gdda0hw3d"
-
-[node name="GeneratorGridShape" type="Node3D" parent="EnvironmentQuery11" node_paths=PackedStringArray("generate_around")]
-script = ExtResource("4_d50e0")
-generate_around = NodePath("../../Contexts/ContextSelf")
-frame_slice = 50
-metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
-
-[node name="TestDistanceTo" type="Node3D" parent="EnvironmentQuery11/GeneratorGridShape" node_paths=PackedStringArray("distance_to")]
-script = ExtResource("5_5peh2")
-distance_to = NodePath("../../../Contexts/ContextTargetPositions")
-scoring_curve = SubResource("Curve_a8xr0")
-metadata/_custom_type_script = "uid://btm8tt22wulwi"
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]

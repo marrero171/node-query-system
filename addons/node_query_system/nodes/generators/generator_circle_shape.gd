@@ -24,6 +24,7 @@ extends Generator
 func perform_generation(query_items_list: Array[QueryItem]) -> void:
 	var contexts: Array[Variant] = circle_center.get_context()
 	var points_amount: int = roundi(circle_radius / space_between)
+	var processed_count: int = 0
 
 	for context: Variant in contexts:
 		var starting_pos: Vector3 = context if context is Vector3 else context.global_position
@@ -46,6 +47,10 @@ func perform_generation(query_items_list: Array[QueryItem]) -> void:
 				query_items_list.append(QueryItem.new(final_pos))
 				continue
 		
+			if frame_slice > 0 and processed_count >= frame_slice:
+				await get_tree().process_frame
+				processed_count = 0
+			processed_count += 1
 			var ray_pos: Vector3 = final_pos
 			
 			var ray_result: Dictionary = cast_ray_projection(ray_pos + Vector3.UP * project_up, ray_pos + Vector3.DOWN * project_down,
