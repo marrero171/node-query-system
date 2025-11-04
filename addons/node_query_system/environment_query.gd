@@ -24,7 +24,7 @@ func request_query() -> QueryResult:
 	query_items.clear()
 	var result: QueryResult
 
-	for generator: Generator in get_children():
+	for generator: QueryGenerator in get_children():
 		await generator.perform_generation(query_items)
 		await generator.perform_tests(query_items)
 
@@ -55,17 +55,17 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var result: Array = []
 
 	if get_children().is_empty():
-		result.append("Query needs at least one Generator node.")
+		result.append("Query needs at least one QueryGenerator node.")
 	else:
 		var has_invalid_node: bool = false
 		for child in get_children():
-			if child is not Generator:
+			if child is not QueryGenerator:
 				has_invalid_node = true
 				break
 		if has_invalid_node:
-			result.append("EnvironmentQuery can only have Generator children.")
+			result.append("EnvironmentQuery can only have QueryGenerator children.")
 		if !check_has_tests():
-			result.append("Query needs at least one test on any Generator")
+			result.append("Query needs at least one test on any QueryGenerator")
 
 
 	return result
