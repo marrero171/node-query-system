@@ -37,13 +37,8 @@ script = ExtResource("2_dt443")
 use_debug_shapes = true
 metadata/_custom_type_script = "uid://dpf3gdda0hw3d"
 
-[node name="GeneratorGridShape" type="Node3D" parent="EnvironmentQuery" node_paths=PackedStringArray("generate_around")]
+[node name="GeneratorGridShape" type="Node3D" parent="EnvironmentQuery"]
 script = ExtResource("4_d50e0")
-grid_half_size = 15.0
-space_between = 2.0
-generate_around = NodePath("../../Contexts/ContextSelf")
-post_projection_vertical_offset = 1.5
-frame_slice = 50
 metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
 
 [node name="TestDotProduct" type="Node3D" parent="EnvironmentQuery/GeneratorGridShape" node_paths=PackedStringArray("from_place", "to_target")]
@@ -85,7 +80,7 @@ metadata/_custom_type_script = "uid://cku0g6f6geqcx"
 
 [node name="ContextPlayer" type="Node3D" parent="Contexts"]
 script = ExtResource("6_d50e0")
-the_group = &"player"
+group = &"player"
 metadata/_custom_type_script = "uid://bvvrmnqi0eyge"
 
 [node name="ContextTargetPositions" type="Node3D" parent="Contexts"]
