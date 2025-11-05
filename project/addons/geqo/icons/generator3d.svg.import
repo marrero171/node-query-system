@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://breu65t4r7v5q"
-path="res://.godot/imported/distance_test3d.svg-0559b30f6a3be15be65470b34e30c44d.ctex"
+uid="uid://cd6b3p4ibgoxs"
+path="res://.godot/imported/generator3d.svg-fce2f91a4d8617bf4bd2b1a466fdd326.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/node_query_system/icons/distance_test3d.svg"
-dest_files=["res://.godot/imported/distance_test3d.svg-0559b30f6a3be15be65470b34e30c44d.ctex"]
+source_file="res://addons/geqo/icons/generator3d.svg"
+dest_files=["res://.godot/imported/generator3d.svg-fce2f91a4d8617bf4bd2b1a466fdd326.ctex"]
 
 [params]
 
@@ -24,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

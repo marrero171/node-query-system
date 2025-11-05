@@ -1,5 +1,5 @@
 # Project
-project/addons/node_query_system/bin/
+project/addons/geqo/bin/
 
 # Godot 4+ specific ignores
 project/.godot/

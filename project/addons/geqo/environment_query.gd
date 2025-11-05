@@ -39,7 +39,7 @@ func request_query() -> QueryResult:
 
 ## Call Debug to draw the items
 func draw_debug(query_items_list: Array[QueryItem]):
-	NQSDebugSpheres.draw_items(query_items_list)
+	GEQODebugSpheres.draw_items(query_items_list)
 
 
 func _notification(what: int) -> void:

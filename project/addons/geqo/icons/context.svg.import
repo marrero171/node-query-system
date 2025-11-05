@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vilwxqxg6f5y"
-path="res://.godot/imported/raycast_test3d.svg-8445fe8237a1c1035d40bc3d844a008c.ctex"
+uid="uid://drcr6mc35chor"
+path="res://.godot/imported/context.svg-eab1c764b6b04a18b48f7f49045c0c35.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/node_query_system/icons/raycast_test3d.svg"
-dest_files=["res://.godot/imported/raycast_test3d.svg-8445fe8237a1c1035d40bc3d844a008c.ctex"]
+source_file="res://addons/geqo/icons/context.svg"
+dest_files=["res://.godot/imported/context.svg-eab1c764b6b04a18b48f7f49045c0c35.ctex"]
 
 [params]
 

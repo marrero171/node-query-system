@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drcr6mc35chor"
-path="res://.godot/imported/context.svg-190f113644cd8b2a8fe06ba2fa613ca1.ctex"
+uid="uid://b04wfgnxbqh3s"
+path="res://.godot/imported/environment_query.svg-05765850a6033c3a9fff79a0c53d2299.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/node_query_system/icons/context.svg"
-dest_files=["res://.godot/imported/context.svg-190f113644cd8b2a8fe06ba2fa613ca1.ctex"]
+source_file="res://addons/geqo/icons/environment_query.svg"
+dest_files=["res://.godot/imported/environment_query.svg-05765850a6033c3a9fff79a0c53d2299.ctex"]
 
 [params]
 
