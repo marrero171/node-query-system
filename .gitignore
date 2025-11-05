@@ -18,3 +18,5 @@ export_presets.cfg
 
 # Editors
 .vscode/
+compile_commands.json
+vc140.pdb

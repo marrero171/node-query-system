@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2ih13se78qrg"]
+[gd_scene load_steps=6 format=3 uid="uid://c2ih13se78qrg"]
 
 [ext_resource type="Script" uid="uid://bd1sfbmbnph3x" path="res://examples/entities/test_player.gd" id="1_ib1tq"]
 
@@ -10,8 +10,6 @@
 albedo_color = Color(0.49803922, 1, 0.49803922, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ib1tq"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v5n8s"]
 
 [node name="TestPlayer" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -31,7 +29,3 @@ surface_material_override/0 = SubResource("ORMMaterial3D_ib1tq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ib1tq")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-shape = SubResource("BoxShape3D_v5n8s")
-target_position = Vector3(0, -7.58, 0)
