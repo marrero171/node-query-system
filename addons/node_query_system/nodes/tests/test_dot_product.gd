@@ -1,4 +1,5 @@
 ## Tests the dot product between two contexts. Currently only supports 1 node3D contexts.
+@icon("../../icons/dot_product_test3d.svg")
 class_name TestDotProduct
 extends QueryTest
 
