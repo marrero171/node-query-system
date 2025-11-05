@@ -1,14 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://nvso64245ltb"]
+[gd_scene load_steps=13 format=3 uid="uid://nvso64245ltb"]
 
 [ext_resource type="Script" uid="uid://cyqo7rh6dj286" path="res://examples/entities/enemy/enemy.gd" id="1_3fvr7"]
-[ext_resource type="Script" uid="uid://dpf3gdda0hw3d" path="res://addons/node_query_system/environment_query.gd" id="2_dt443"]
-[ext_resource type="Script" uid="uid://y7tg0wcvbq0a" path="res://addons/node_query_system/nodes/generators/generator_grid_shape.gd" id="4_d50e0"]
-[ext_resource type="Script" uid="uid://cku0g6f6geqcx" path="res://addons/node_query_system/nodes/contexts/context_target_node.gd" id="5_4wwj3"]
-[ext_resource type="Script" uid="uid://btm8tt22wulwi" path="res://addons/node_query_system/nodes/tests/test_distance_to.gd" id="5_5peh2"]
-[ext_resource type="Script" uid="uid://d1q6i40l8gvoi" path="res://addons/node_query_system/nodes/tests/test_raycast_to.gd" id="6_721x4"]
-[ext_resource type="Script" uid="uid://doup3ax1vq4dw" path="res://addons/node_query_system/nodes/tests/test_dot_product.gd" id="6_a8xr0"]
-[ext_resource type="Script" uid="uid://bvvrmnqi0eyge" path="res://addons/node_query_system/nodes/contexts/context_in_group.gd" id="6_d50e0"]
-[ext_resource type="Script" uid="uid://ddjx0xky8ewx3" path="res://addons/node_query_system/nodes/contexts/context_target_positions.gd" id="8_5bnyk"]
+[ext_resource type="Script" uid="uid://dpf3gdda0hw3d" path="res://addons/geqo/environment_query.gd" id="2_dt443"]
+[ext_resource type="Script" uid="uid://y7tg0wcvbq0a" path="res://addons/geqo/nodes/generators/generator_grid_shape.gd" id="4_d50e0"]
+[ext_resource type="Script" uid="uid://cku0g6f6geqcx" path="res://addons/geqo/nodes/contexts/context_target_node.gd" id="5_4wwj3"]
+[ext_resource type="Script" uid="uid://btm8tt22wulwi" path="res://addons/geqo/nodes/tests/test_distance_to.gd" id="5_5peh2"]
+[ext_resource type="Script" uid="uid://d1q6i40l8gvoi" path="res://addons/geqo/nodes/tests/test_raycast_to.gd" id="6_721x4"]
+[ext_resource type="Script" uid="uid://bvvrmnqi0eyge" path="res://addons/geqo/nodes/contexts/context_in_group.gd" id="6_d50e0"]
+[ext_resource type="Script" uid="uid://ddjx0xky8ewx3" path="res://addons/geqo/nodes/contexts/context_target_positions.gd" id="8_5bnyk"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_036b0"]
 
@@ -42,12 +41,6 @@ script = ExtResource("4_d50e0")
 generate_around = NodePath("../../Contexts/ContextSelf")
 post_projection_vertical_offset = 1.5
 metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
-
-[node name="TestDotProduct" type="Node3D" parent="EnvironmentQuery/GeneratorGridShape" node_paths=PackedStringArray("from_place", "to_target")]
-script = ExtResource("6_a8xr0")
-from_place = NodePath("../../../Contexts/ContextSelf")
-to_target = NodePath("../../../Contexts/ContextPlayer")
-metadata/_custom_type_script = "uid://doup3ax1vq4dw"
 
 [node name="TestRaycastToPlayer" type="Node3D" parent="EnvironmentQuery/GeneratorGridShape" node_paths=PackedStringArray("context", "exclusions")]
 script = ExtResource("6_721x4")

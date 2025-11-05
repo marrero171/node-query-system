@@ -19,7 +19,7 @@ sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/addons/node_query_system/bin/libgdexample.{}.{}.framework/libgdexample.{}.{}".format(
+        "project/addons/geqo/bin/geqo.{}.{}.framework/geqo.{}.{}".format(
             env["platform"], env["target"], env["platform"], env["target"]
         ),
         source=sources,
@@ -27,17 +27,17 @@ if env["platform"] == "macos":
 elif env["platform"] == "ios":
     if env["ios_simulator"]:
         library = env.StaticLibrary(
-            "project/addons/node_query_system/bin/libgdexample.{}.{}.simulator.a".format(env["platform"], env["target"]),
+            "project/addons/geqo/bin/geqo.{}.{}.simulator.a".format(env["platform"], env["target"]),
             source=sources,
         )
     else:
         library = env.StaticLibrary(
-            "project/addons/node_query_system/bin/libgdexample.{}.{}.a".format(env["platform"], env["target"]),
+            "project/addons/geqo/bin/geqo.{}.{}.a".format(env["platform"], env["target"]),
             source=sources,
         )
 else:
     library = env.SharedLibrary(
-        "project/addons/node_query_system/bin/libgdexample{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        "project/addons/geqo/bin/geqo{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
 

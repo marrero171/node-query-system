@@ -10,18 +10,18 @@ config_version=5
 
 [application]
 
-config/name="Node Query System"
+config/name="Godot Environment Query Orchestrator"
 run/main_scene="uid://bep8vp2474roh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-NQSDebugSpheres="*res://addons/node_query_system/./debug/debug_sphere.gd"
+GEQODebugSpheres="*res://addons/geqo/./debug/debug_sphere.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/node_query_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/geqo/plugin.cfg")
 
 [global_group]
 

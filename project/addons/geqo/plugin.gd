@@ -4,12 +4,12 @@ extends EditorPlugin
 
 func _enable_plugin() -> void:
 	# Add autoloads here.
-	add_autoload_singleton("NQSDebugSpheres", "./debug/debug_sphere.gd")
+	add_autoload_singleton("GEQODebugSpheres", "./debug/debug_sphere.gd")
 
 
 func _disable_plugin() -> void:
 	# Remove autoloads here.
-	remove_autoload_singleton("NQSDebugSpheres")
+	remove_autoload_singleton("GEQODebugSpheres")
 
 
 func _enter_tree() -> void:
