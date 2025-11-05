@@ -1,7 +1,7 @@
 @tool
-class_name GeneratorGridShape extends Generator
+class_name GeneratorGridShape extends QueryGenerator
 
-@export_group("Generator")
+@export_group("QueryGenerator")
 @export var grid_half_size: float = 20
 @export var space_between: float = 5
 @export var generate_around: QueryContext

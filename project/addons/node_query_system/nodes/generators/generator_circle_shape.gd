@@ -1,8 +1,8 @@
 @tool
 class_name GeneratorCircleShape
-extends Generator
+extends QueryGenerator
 
-@export_group("Generator")
+@export_group("QueryGenerator")
 @export var circle_center: QueryContext
 @export var circle_radius: float = 100
 @export var space_between: float = 5
