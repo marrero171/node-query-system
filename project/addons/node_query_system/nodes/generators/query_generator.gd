@@ -2,7 +2,7 @@
 @tool
 @icon("../../icons/generator3d.svg")
 @abstract
-class_name Generator
+class_name QueryGenerator
 extends Node3D
 
 enum RaycastMode {BODY, AREA, BODY_AREA}
@@ -40,13 +40,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var has_generator: bool = false
 
 	for child in get_children():
-		if child is Generator:
+		if child is QueryGenerator:
 			has_generator = true
 		elif child is not QueryTest:
 			has_invalid_node = true
 
 	if has_invalid_node:
-		result.append("Generator has invalid children. Only QueryTest children are allowed")
+		result.append("QueryGenerator has invalid children. Only QueryTest children are allowed")
 
 	if has_generator:
 		result.append("Cannot nest Generators on each other.")
