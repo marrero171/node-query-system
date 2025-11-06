@@ -18,8 +18,8 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
     }
 
     GDREGISTER_RUNTIME_CLASS(GDExample);
-    GDREGISTER_RUNTIME_CLASS(CEnvironmentQuery);
     GDREGISTER_RUNTIME_CLASS(CQueryResult);
+    GDREGISTER_RUNTIME_CLASS(CEnvironmentQuery);
 }
 
 void uninitialize_geqo_module(ModuleInitializationLevel p_level)

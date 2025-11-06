@@ -68,6 +68,22 @@ metadata/_custom_type_script = "uid://btm8tt22wulwi"
 
 [node name="CEnvironmentQuery" type="CEnvironmentQuery" parent="."]
 
+[node name="GeneratorGridShape" type="Node3D" parent="CEnvironmentQuery"]
+script = ExtResource("4_d50e0")
+metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
+
+[node name="GeneratorGridShape2" type="Node3D" parent="CEnvironmentQuery"]
+script = ExtResource("4_d50e0")
+metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
+
+[node name="GeneratorGridShape3" type="Node3D" parent="CEnvironmentQuery"]
+script = ExtResource("4_d50e0")
+metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
+
+[node name="GeneratorGridShape4" type="Node3D" parent="CEnvironmentQuery"]
+script = ExtResource("4_d50e0")
+metadata/_custom_type_script = "uid://y7tg0wcvbq0a"
+
 [node name="Contexts" type="Node3D" parent="."]
 
 [node name="ContextSelf" type="Node3D" parent="Contexts" node_paths=PackedStringArray("target_node")]

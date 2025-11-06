@@ -1,20 +1,11 @@
-#ifndef ENVIRONMENTQUERY_H
-#define ENVIRONMENTQUERY_H
-
+#pragma once
+#include "query_result.h"
 #include <godot_cpp/classes/node.hpp>
 #include <vector>
 using std::vector;
 
 namespace godot
 {
-    struct CQueryItem
-    {
-        double score = 0.0;
-        bool is_filtered = false;
-        bool has_score = false;
-        Vector3 projection_position;
-        Node *collided_with;
-    };
     class CEnvironmentQuery : public Node
     {
         GDCLASS(CEnvironmentQuery, Node)
@@ -29,7 +20,7 @@ namespace godot
         void set_use_debug_shapes(const bool use_debug);
         bool get_use_debug_shapes() const;
 
-        void request_query();
+        Ref<CQueryResult> request_query();
 
     private:
         bool use_debug_shapes;
@@ -37,4 +28,3 @@ namespace godot
     };
 
 }
-#endif
