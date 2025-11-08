@@ -4,6 +4,7 @@
 #include "environment_query.h"
 #include "query_result.h"
 #include "query_context3d.h"
+#include "query_generator3d.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -21,7 +22,8 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
     GDREGISTER_RUNTIME_CLASS(GDExample);
     GDREGISTER_RUNTIME_CLASS(CQueryResult);
     GDREGISTER_RUNTIME_CLASS(CEnvironmentQuery);
-    GDREGISTER_VIRTUAL_CLASS(CQueryContext3D);
+    GDREGISTER_ABSTRACT_CLASS(CQueryContext3D);
+    GDREGISTER_ABSTRACT_CLASS(CQueryGenerator3D);
 }
 
 void uninitialize_geqo_module(ModuleInitializationLevel p_level)

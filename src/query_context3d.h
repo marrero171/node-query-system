@@ -13,7 +13,7 @@ public:
     CQueryContext3D();
     ~CQueryContext3D();
 
-    virtual Array get_context();
+    virtual Array get_context() = 0;
     PackedVector3Array get_context_positions();
 
 private:
