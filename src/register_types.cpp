@@ -5,6 +5,10 @@
 #include "query_result.h"
 #include "query_context3d.h"
 #include "query_generator3d.h"
+#include "query_test3d.h"
+
+// Tests
+#include <tests/test_distance_to3d.h>
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -19,11 +23,14 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
         return;
     }
 
-    GDREGISTER_RUNTIME_CLASS(GDExample);
     GDREGISTER_RUNTIME_CLASS(CQueryResult);
     GDREGISTER_RUNTIME_CLASS(CEnvironmentQuery);
     GDREGISTER_ABSTRACT_CLASS(CQueryContext3D);
     GDREGISTER_ABSTRACT_CLASS(CQueryGenerator3D);
+    GDREGISTER_ABSTRACT_CLASS(CQueryTest3D);
+
+    // Tests
+    GDREGISTER_CLASS(CTestDistanceTo);
 }
 
 void uninitialize_geqo_module(ModuleInitializationLevel p_level)
