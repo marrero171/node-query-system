@@ -12,6 +12,11 @@ struct CQueryItem
     Vector3 projection_position = Vector3(0.0, 0.0, 0.0);
     Node *collided_with = nullptr;
 
+    CQueryItem(Vector3 pos)
+    {
+        projection_position = pos;
+    }
+
     void add_score(double amount)
     {
         score += amount;
