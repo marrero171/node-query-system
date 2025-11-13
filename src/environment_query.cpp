@@ -1,6 +1,7 @@
 #include "environment_query.h"
 #include "query_generator3d.h"
 #include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/classes/engine.hpp>
 
 using namespace godot;
 
@@ -55,5 +56,9 @@ Ref<CQueryResult> CEnvironmentQuery::request_query()
     result.instantiate();
     result->set_items(query_items);
 
+    if (use_debug_shapes)
+    {
+        Object *debug_shape_node = Engine::get_singleton()->get_singleton("GEQODebugSpheres");
+    }
     return result;
 }

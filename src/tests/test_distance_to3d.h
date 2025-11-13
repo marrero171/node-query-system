@@ -19,8 +19,8 @@ namespace godot
         Ref<Curve> get_scoring_curve() const;
         void set_scoring_curve(Ref<Curve> curve);
 
-        CQueryContext3D *get_distance_to() const;
-        void set_distance_to(CQueryContext3D *context_node);
+        NodePath get_distance_to();
+        void set_distance_to(const NodePath &context_node);
 
         double get_min_distance() const;
         void set_min_distance(double dist);
@@ -33,7 +33,9 @@ namespace godot
 
     private:
         Ref<Curve> scoring_curve;
-        CQueryContext3D *distance_to;
+        NodePath distance_to;
+        CQueryContext3D *distance_to_ref;
+
         double min_distance = 0.0;
         double max_distance = 10.0;
     };

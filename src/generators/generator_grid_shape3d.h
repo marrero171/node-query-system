@@ -15,14 +15,16 @@ namespace godot
         CGeneratorGridShape3D();
         ~CGeneratorGridShape3D();
 
+        void _ready() override;
+
         double get_grid_half_size() const;
         void set_grid_half_size(double size);
 
         double get_space_between() const;
         void set_space_between(double space);
 
-        CQueryContext3D *get_generate_around() const;
-        void set_generate_around(CQueryContext3D *context);
+        NodePath get_generate_around();
+        void set_generate_around(const NodePath &context);
 
         bool get_use_vertical_projection() const;
         void set_use_vertical_projection(bool use);
@@ -46,7 +48,8 @@ namespace godot
         // QueryGenerator
         double grid_half_size = 20.0;
         double space_between = 5.0;
-        CQueryContext3D *generate_around;
+        NodePath generate_around;
+        CQueryContext3D *generate_around_ref;
 
         // Projection Data
         bool use_vertical_projection = true;

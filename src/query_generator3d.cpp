@@ -40,6 +40,11 @@ void CQueryGenerator3D::perform_tests(vector<CQueryItem> query_item_list)
         for (CQueryItem query_item : query_item_list)
         {
             CQueryTest3D *current_test = Object::cast_to<CQueryTest3D>(test);
+            if (current_test == nullptr)
+            {
+                print_error("Invalid test, is this a QueryTest node?");
+                continue;
+            }
             current_test->perform_test(query_item);
         }
     }

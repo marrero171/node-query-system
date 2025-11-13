@@ -30,7 +30,7 @@ void CGeneratorGridShape3D::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_projection_collision_mask"), &CGeneratorGridShape3D::get_projection_collision_mask);
     ClassDB::bind_method(D_METHOD("set_projection_collision_mask", "mask"), &CGeneratorGridShape3D::set_projection_collision_mask);
 
-    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "generate_around", PROPERTY_HINT_NODE_TYPE, "CQueryContext"), "set_generate_around", "get_generate_around");
+    ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "generate_around", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "CQueryContext3D"), "set_generate_around", "get_generate_around");
 }
 
 CGeneratorGridShape3D::CGeneratorGridShape3D()
@@ -39,6 +39,12 @@ CGeneratorGridShape3D::CGeneratorGridShape3D()
 
 CGeneratorGridShape3D::~CGeneratorGridShape3D()
 {
+}
+
+void godot::CGeneratorGridShape3D::_ready()
+{
+    if (!generate_around.is_empty())
+        generate_around_ref = get_node<CQueryContext3D>(generate_around);
 }
 
 double CGeneratorGridShape3D::get_grid_half_size() const
@@ -61,14 +67,16 @@ void CGeneratorGridShape3D::set_space_between(double space)
     space_between = space;
 }
 
-CQueryContext3D *CGeneratorGridShape3D::get_generate_around() const
+NodePath CGeneratorGridShape3D::get_generate_around()
 {
     return generate_around;
 }
 
-void CGeneratorGridShape3D::set_generate_around(CQueryContext3D *context)
+void CGeneratorGridShape3D::set_generate_around(const NodePath &context)
 {
     generate_around = context;
+    if (!generate_around.is_empty())
+        generate_around_ref = get_node<CQueryContext3D>(generate_around);
 }
 
 bool CGeneratorGridShape3D::get_use_vertical_projection() const
@@ -123,8 +131,13 @@ void CGeneratorGridShape3D::set_projection_collision_mask(int mask)
 
 void CGeneratorGridShape3D::perform_generation(vector<CQueryItem> query_item_list)
 {
+    if (generate_around_ref == nullptr)
+    {
+        print_error("Generator couldn't find Context");
+        return;
+    }
     int grid_size = std::round(grid_half_size * 2 / space_between) + 1;
-    Array contexts = generate_around->get_context();
+    Array contexts = generate_around_ref->get_context();
 
     for (Variant context : contexts)
     {
