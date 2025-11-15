@@ -60,5 +60,7 @@ Ref<CQueryResult> CEnvironmentQuery::request_query()
     {
         Object *debug_shape_node = Engine::get_singleton()->get_singleton("GEQODebugSpheres");
     }
+    UtilityFunctions::print("Results: ", result->get_highest_score_position());
+    UtilityFunctions::print("Amount of items: ", result->get_query_items().size());
     return result;
 }

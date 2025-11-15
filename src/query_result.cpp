@@ -36,3 +36,8 @@ Node *CQueryResult::get_highest_score_node() const
     vector<CQueryItem>::const_iterator best_score = std::max_element(query_items.begin(), query_items.end());
     return best_score->collided_with;
 }
+
+vector<CQueryItem> &CQueryResult::get_query_items()
+{
+    return query_items;
+}

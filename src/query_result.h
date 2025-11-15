@@ -60,4 +60,5 @@ public:
 
     Vector3 get_highest_score_position() const;
     Node *get_highest_score_node() const;
+    vector<CQueryItem> &get_query_items();
 };

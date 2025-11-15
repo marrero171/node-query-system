@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://nvso64245ltb"]
+[gd_scene load_steps=10 format=3 uid="uid://nvso64245ltb"]
 
 [ext_resource type="Script" uid="uid://cyqo7rh6dj286" path="res://examples/entities/enemy/enemy.gd" id="1_3fvr7"]
 [ext_resource type="Script" uid="uid://dpf3gdda0hw3d" path="res://addons/geqo/environment_query.gd" id="2_dt443"]
@@ -10,6 +10,10 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_036b0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fj7yv"]
+
+[sub_resource type="Curve" id="Curve_qgt2e"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
@@ -33,7 +37,7 @@ script = ExtResource("6_d50e0")
 group = &"player"
 metadata/_custom_type_script = "uid://bvvrmnqi0eyge"
 
-[node name="CContextTargetNode3D" type="CContextTargetNode3D" parent="Contexts" node_paths=PackedStringArray("target_node")]
+[node name="CContextSelf" type="CContextTargetNode3D" parent="Contexts" node_paths=PackedStringArray("target_node")]
 target_node = NodePath("../..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -60,9 +64,11 @@ metadata/_custom_type_script = "uid://d1q6i40l8gvoi"
 [node name="CEnvironmentQuery" type="CEnvironmentQuery" parent="."]
 
 [node name="CGeneratorGridShape3D" type="CGeneratorGridShape3D" parent="CEnvironmentQuery" node_paths=PackedStringArray("generate_around")]
-generate_around = NodePath("../../Contexts/CContextTargetNode3D")
+generate_around = NodePath("../../Contexts/CContextSelf")
 
 [node name="CTestDistanceTo" type="CTestDistanceTo" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("distance_to")]
-distance_to = NodePath("../../../Contexts/CContextTargetNode3D")
+distance_to = NodePath("../../../Contexts/CContextSelf")
+max_distance = 15.0
+scoring_curve = SubResource("Curve_qgt2e")
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
