@@ -134,12 +134,15 @@ void CTestDistanceTo::perform_test(CQueryItem &projection)
             projection.is_filtered = true;
         else
             projection.add_score(result);
+        break;
     }
     case FILTER_ONLY:
         if (result == 0.0)
             projection.is_filtered = true;
+        break;
     case SCORE_ONLY:
         projection.add_score(result);
+        break;
     }
 }
 
