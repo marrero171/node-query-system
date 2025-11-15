@@ -23,8 +23,8 @@ namespace godot
         double get_space_between() const;
         void set_space_between(double space);
 
-        NodePath get_generate_around();
-        void set_generate_around(const NodePath &context);
+        CQueryContext3D *get_generate_around();
+        void set_generate_around(CQueryContext3D *context);
 
         bool get_use_vertical_projection() const;
         void set_use_vertical_projection(bool use);
@@ -48,8 +48,7 @@ namespace godot
         // QueryGenerator
         double grid_half_size = 20.0;
         double space_between = 5.0;
-        NodePath generate_around;
-        CQueryContext3D *generate_around_ref;
+        CQueryContext3D *generate_around = nullptr;
 
         // Projection Data
         bool use_vertical_projection = true;

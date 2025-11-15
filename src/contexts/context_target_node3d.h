@@ -13,11 +13,11 @@ public:
     CContextTargetNode3D();
     ~CContextTargetNode3D();
 
-    void set_target_node(const NodePath &target);
-    NodePath get_target_node();
+    void set_target_node(Node3D *target);
+    Node3D *get_target_node();
 
     Array get_context() override;
 
 private:
-    NodePath target_node;
+    Node3D *target_node = nullptr;
 };

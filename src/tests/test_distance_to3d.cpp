@@ -18,7 +18,8 @@ void CTestDistanceTo::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_max_distance"), &CTestDistanceTo::get_max_distance);
     ClassDB::bind_method(D_METHOD("set_max_distance", "dist"), &CTestDistanceTo::set_max_distance);
 
-    ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "distance_to", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "CQueryContext3D"), "set_distance_to", "get_distance_to");
+    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "distance_to", PROPERTY_HINT_NODE_TYPE, "CQueryContext3D"), "set_distance_to", "get_distance_to");
+
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "min_distance"), "set_min_distance", "get_min_distance");
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "max_distance"), "set_max_distance", "get_max_distance");
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "scoring_curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_scoring_curve", "get_scoring_curve");
@@ -42,16 +43,14 @@ void godot::CTestDistanceTo::set_scoring_curve(Ref<Curve> curve)
     scoring_curve = curve;
 }
 
-NodePath CTestDistanceTo::get_distance_to()
+CQueryContext3D *CTestDistanceTo::get_distance_to()
 {
     return distance_to;
 }
 
-void CTestDistanceTo::set_distance_to(const NodePath &context_node)
+void CTestDistanceTo::set_distance_to(CQueryContext3D *context_node)
 {
     distance_to = context_node;
-    if (!distance_to.is_empty())
-        distance_to_ref = get_node<CQueryContext3D>(distance_to);
 }
 
 double CTestDistanceTo::get_min_distance() const
@@ -77,13 +76,13 @@ void godot::CTestDistanceTo::set_max_distance(double dist)
 void CTestDistanceTo::perform_test(CQueryItem &projection)
 {
     UtilityFunctions::print_rich("Testing the tested test to test");
-    if (distance_to_ref == nullptr)
+    if (distance_to == nullptr)
     {
         UtilityFunctions::print_rich("Test has no context");
         return;
     }
 
-    Array context_positions = distance_to_ref->get_context_positions();
+    Array context_positions = distance_to->get_context_positions();
     vector<double> scores;
 
     for (Variant context_pos : context_positions)
@@ -145,8 +144,6 @@ void CTestDistanceTo::perform_test(CQueryItem &projection)
 
 void CTestDistanceTo::_ready()
 {
-    if (!distance_to.is_empty())
-        distance_to_ref = get_node<CQueryContext3D>(distance_to);
     if (Engine::get_singleton()->is_editor_hint())
     {
         return;
