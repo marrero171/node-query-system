@@ -1,3 +1,24 @@
+# Project
+project/addons/geqo/bin/
+
 # Godot 4+ specific ignores
-.godot/
-/android/
+.godot
+project/.godot/
+project/android/
+export.cfg
+export_presets.cfg
+
+# Object
+.scons-cache/
+*.os
+*.obj
+*.o
+
+# Sconstruct
+.sconsign.dblite
+SConstruct
+
+# Editors
+.vscode/
+compile_commands.json
+vc140.pdb
