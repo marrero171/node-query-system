@@ -9,6 +9,7 @@
 #include "query_test3d.h"
 // Contexts
 #include <contexts/context_target_node3d.h>
+#include <contexts/context_in_group3d.h>
 
 // Generators
 #include <generators/generator_grid_shape3d.h>
@@ -39,6 +40,7 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
 
     // Contexts
     GDREGISTER_CLASS(CContextTargetNode3D);
+    GDREGISTER_CLASS(CContextInGroup3D);
 
     // Generators
     GDREGISTER_CLASS(CGeneratorGridShape3D);

@@ -40,6 +40,9 @@ metadata/_custom_type_script = "uid://bvvrmnqi0eyge"
 [node name="CContextSelf" type="CContextTargetNode3D" parent="Contexts" node_paths=PackedStringArray("target_node")]
 target_node = NodePath("../..")
 
+[node name="CContextPlayer" type="CContextInGroup3D" parent="Contexts"]
+group = &"player"
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="EnvironmentQuery" type="Node" parent="."]
@@ -68,13 +71,13 @@ generate_around = NodePath("../../Contexts/CContextSelf")
 post_projection_vertical_offset = 1.5
 
 [node name="CTestDistanceTo3D" type="CTestDistanceTo3D" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("distance_to")]
-distance_to = NodePath("../../../Contexts/CContextSelf")
+distance_to = NodePath("../../../Contexts/CContextPlayer")
 min_distance = 5.0
 max_distance = 20.0
 scoring_curve = SubResource("Curve_qgt2e")
 
 [node name="CTestRaycastTo3D" type="CTestRaycastTo3D" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("context")]
-context = NodePath("../../../Contexts/CContextSelf")
+context = NodePath("../../../Contexts/CContextPlayer")
 exclusions = [NodePath("../../..")]
 collision_mask = 3
 
