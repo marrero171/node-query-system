@@ -2,6 +2,7 @@
 
 #include <debug/geqo_debug_spheres.h>
 #include "gdexample.h"
+
 #include "environment_query.h"
 #include "query_result.h"
 #include "query_context3d.h"
@@ -33,25 +34,25 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
         return;
     }
 
-    GDREGISTER_CLASS(CGEQODebugSpheres);
-    GDREGISTER_CLASS(CQueryResult);
-    GDREGISTER_CLASS(CEnvironmentQuery);
-    GDREGISTER_ABSTRACT_CLASS(CQueryContext3D);
-    GDREGISTER_ABSTRACT_CLASS(CQueryGenerator3D);
-    GDREGISTER_ABSTRACT_CLASS(CQueryTest3D);
+    ClassDB::register_class<CGEQODebugSpheres>();
+    ClassDB::register_class<CQueryResult>();
+    ClassDB::register_class<CEnvironmentQuery>();
+    ClassDB::register_abstract_class<CQueryContext3D>();
+    ClassDB::register_abstract_class<CQueryGenerator3D>();
+    ClassDB::register_abstract_class<CQueryTest3D>();
 
     // Contexts
-    GDREGISTER_CLASS(CContextTargetNode3D);
-    GDREGISTER_CLASS(CContextInGroup3D);
+    ClassDB::register_class<CContextTargetNode3D>();
+    ClassDB::register_class<CContextInGroup3D>();
 
     // Generators
-    GDREGISTER_CLASS(CGeneratorGridShape3D);
-    GDREGISTER_CLASS(CGeneratorCircleShape3D);
+    ClassDB::register_class<CGeneratorGridShape3D>();
+    ClassDB::register_class<CGeneratorCircleShape3D>();
 
     // Tests
-    GDREGISTER_CLASS(CTestDistanceTo3D);
-    GDREGISTER_CLASS(CTestRaycastTo3D);
-    GDREGISTER_CLASS(CTestDotProduct3D);
+    ClassDB::register_class<CTestDistanceTo3D>();
+    ClassDB::register_class<CTestRaycastTo3D>();
+    ClassDB::register_class<CTestDotProduct3D>();
 }
 
 void uninitialize_geqo_module(ModuleInitializationLevel p_level)
