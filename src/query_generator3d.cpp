@@ -67,7 +67,6 @@ Dictionary CQueryGenerator3D::cast_ray_projection(Vector3 start_pos, Vector3 end
 
     Array exclusion_rids = Array();
 
-    // TODO: Figure out how to get the RIDs
     for (Variant exclusion : exclusions)
     {
         CollisionObject3D *node = Object::cast_to<CollisionObject3D>(exclusion.operator Object *());

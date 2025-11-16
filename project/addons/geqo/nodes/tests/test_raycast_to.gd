@@ -7,7 +7,7 @@ extends QueryTest
 @export var hitting_is_true: bool = true
 ## Start raycast from context's position instead
 @export var cast_from_context: bool = false
-@export var exclusions: Array[Node3D]
+@export var exclusions: Array[CollisionObject3D]
 @export_flags_3d_physics var collision_mask: int = 1
 
 func perform_test(projection: QueryItem):

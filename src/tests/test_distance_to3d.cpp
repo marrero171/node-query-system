@@ -4,19 +4,19 @@
 #include <numeric>
 using namespace godot;
 
-void CTestDistanceTo::_bind_methods()
+void CTestDistanceTo3D::_bind_methods()
 {
-    ClassDB::bind_method(D_METHOD("get_scoring_curve"), &CTestDistanceTo::get_scoring_curve);
-    ClassDB::bind_method(D_METHOD("set_scoring_curve", "curve"), &CTestDistanceTo::set_scoring_curve);
+    ClassDB::bind_method(D_METHOD("get_scoring_curve"), &CTestDistanceTo3D::get_scoring_curve);
+    ClassDB::bind_method(D_METHOD("set_scoring_curve", "curve"), &CTestDistanceTo3D::set_scoring_curve);
 
-    ClassDB::bind_method(D_METHOD("get_distance_to"), &CTestDistanceTo::get_distance_to);
-    ClassDB::bind_method(D_METHOD("set_distance_to", "context_node"), &CTestDistanceTo::set_distance_to);
+    ClassDB::bind_method(D_METHOD("get_distance_to"), &CTestDistanceTo3D::get_distance_to);
+    ClassDB::bind_method(D_METHOD("set_distance_to", "context_node"), &CTestDistanceTo3D::set_distance_to);
 
-    ClassDB::bind_method(D_METHOD("get_min_distance"), &CTestDistanceTo::get_min_distance);
-    ClassDB::bind_method(D_METHOD("set_min_distance", "dist"), &CTestDistanceTo::set_min_distance);
+    ClassDB::bind_method(D_METHOD("get_min_distance"), &CTestDistanceTo3D::get_min_distance);
+    ClassDB::bind_method(D_METHOD("set_min_distance", "dist"), &CTestDistanceTo3D::set_min_distance);
 
-    ClassDB::bind_method(D_METHOD("get_max_distance"), &CTestDistanceTo::get_max_distance);
-    ClassDB::bind_method(D_METHOD("set_max_distance", "dist"), &CTestDistanceTo::set_max_distance);
+    ClassDB::bind_method(D_METHOD("get_max_distance"), &CTestDistanceTo3D::get_max_distance);
+    ClassDB::bind_method(D_METHOD("set_max_distance", "dist"), &CTestDistanceTo3D::set_max_distance);
 
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "distance_to", PROPERTY_HINT_NODE_TYPE, "CQueryContext3D"), "set_distance_to", "get_distance_to");
 
@@ -25,55 +25,55 @@ void CTestDistanceTo::_bind_methods()
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "scoring_curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_scoring_curve", "get_scoring_curve");
 }
 
-CTestDistanceTo::CTestDistanceTo()
+CTestDistanceTo3D::CTestDistanceTo3D()
 {
 }
 
-CTestDistanceTo::~CTestDistanceTo()
+CTestDistanceTo3D::~CTestDistanceTo3D()
 {
 }
 
-Ref<Curve> CTestDistanceTo::get_scoring_curve() const
+Ref<Curve> CTestDistanceTo3D::get_scoring_curve() const
 {
     return scoring_curve;
 }
 
-void godot::CTestDistanceTo::set_scoring_curve(Ref<Curve> curve)
+void godot::CTestDistanceTo3D::set_scoring_curve(Ref<Curve> curve)
 {
     scoring_curve = curve;
 }
 
-CQueryContext3D *CTestDistanceTo::get_distance_to()
+CQueryContext3D *CTestDistanceTo3D::get_distance_to()
 {
     return distance_to;
 }
 
-void CTestDistanceTo::set_distance_to(CQueryContext3D *context_node)
+void CTestDistanceTo3D::set_distance_to(CQueryContext3D *context_node)
 {
     distance_to = context_node;
 }
 
-double CTestDistanceTo::get_min_distance() const
+double CTestDistanceTo3D::get_min_distance() const
 {
     return min_distance;
 }
 
-void CTestDistanceTo::set_min_distance(double dist)
+void CTestDistanceTo3D::set_min_distance(double dist)
 {
     min_distance = dist;
 }
 
-double godot::CTestDistanceTo::get_max_distance() const
+double godot::CTestDistanceTo3D::get_max_distance() const
 {
     return max_distance;
 }
 
-void godot::CTestDistanceTo::set_max_distance(double dist)
+void godot::CTestDistanceTo3D::set_max_distance(double dist)
 {
     max_distance = dist;
 }
 
-void CTestDistanceTo::perform_test(CQueryItem &projection)
+void CTestDistanceTo3D::perform_test(CQueryItem &projection)
 {
     // UtilityFunctions::print_rich("Testing the tested test to test");
     if (distance_to == nullptr)
@@ -146,7 +146,7 @@ void CTestDistanceTo::perform_test(CQueryItem &projection)
     }
 }
 
-void CTestDistanceTo::_ready()
+void CTestDistanceTo3D::_ready()
 {
     if (Engine::get_singleton()->is_editor_hint())
     {

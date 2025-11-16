@@ -12,8 +12,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fj7yv"]
 
 [sub_resource type="Curve" id="Curve_qgt2e"]
-_data = [Vector2(0, 1), 0.0, -1.9952153, 0, 1, Vector2(0.501199, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.0048075, 0.0, 1, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 4
@@ -67,10 +67,15 @@ use_debug_shapes = true
 generate_around = NodePath("../../Contexts/CContextSelf")
 post_projection_vertical_offset = 1.5
 
-[node name="CTestDistanceTo" type="CTestDistanceTo" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("distance_to")]
+[node name="CTestDistanceTo3D" type="CTestDistanceTo3D" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("distance_to")]
 distance_to = NodePath("../../../Contexts/CContextSelf")
 min_distance = 5.0
 max_distance = 20.0
 scoring_curve = SubResource("Curve_qgt2e")
+
+[node name="CTestRaycastTo3D" type="CTestRaycastTo3D" parent="CEnvironmentQuery/CGeneratorGridShape3D" node_paths=PackedStringArray("context")]
+context = NodePath("../../../Contexts/CContextSelf")
+exclusions = [NodePath("../../..")]
+collision_mask = 3
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]

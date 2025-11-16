@@ -5,16 +5,16 @@
 
 namespace godot
 {
-    class CTestDistanceTo : public CQueryTest3D
+    class CTestDistanceTo3D : public CQueryTest3D
     {
-        GDCLASS(CTestDistanceTo, CQueryTest3D)
+        GDCLASS(CTestDistanceTo3D, CQueryTest3D)
 
     protected:
         static void _bind_methods();
 
     public:
-        CTestDistanceTo();
-        ~CTestDistanceTo();
+        CTestDistanceTo3D();
+        ~CTestDistanceTo3D();
 
         Ref<Curve> get_scoring_curve() const;
         void set_scoring_curve(Ref<Curve> curve);

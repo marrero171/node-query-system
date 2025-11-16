@@ -9,7 +9,9 @@ reloadable = true
 CEnvironmentQuery = "res://addons/geqo/icons/environment_query.svg"
 CQueryTest3D = "res://addons/geqo/icons/query_test3d.svg"
 CQueryGenerator3D = "res://addons/geqo/icons/generator3d.svg"
-CTestDistanceTo = "res://addons/geqo/icons/distance_test3d.svg"
+
+CTestDistanceTo3D = "res://addons/geqo/icons/distance_test3d.svg"
+CTestRaycastTo3D = "res://addons/geqo/icons/raycast_test3d.svg"
 
 CGeneratorGridShape3D = "res://addons/geqo/icons/generator3d.svg"
 
