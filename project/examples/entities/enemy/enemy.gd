@@ -15,7 +15,6 @@ var current_target
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("request_query"):
 		var query_result: CQueryResult = env_query.request_query()
-		print("Bichito: ", query_result.get_highest_score_position())
 		final_target = query_result.get_highest_score_position()
 		if !final_target:
 			return

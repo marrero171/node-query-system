@@ -47,9 +47,7 @@ void godot::CEnvironmentQuery::_ready()
 
 Ref<CQueryResult> CEnvironmentQuery::request_query()
 {
-    UtilityFunctions::print_rich(String("Requested a query in C++"));
     query_items.clear();
-    UtilityFunctions::print_rich(get_child_count());
 
     for (Variant child : get_children())
     {
@@ -73,8 +71,6 @@ Ref<CQueryResult> CEnvironmentQuery::request_query()
     {
         debug_spheres->draw_items(query_items);
     }
-    UtilityFunctions::print("Results: ", result->get_highest_score_position());
-    UtilityFunctions::print("Amount of items: ", result->get_query_items().size());
     emit_signal("query_finished", result);
     return result;
 }

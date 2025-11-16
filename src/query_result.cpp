@@ -26,7 +26,6 @@ Vector3 CQueryResult::get_highest_score_position() const
 
     vector<CQueryItem>::const_iterator best_score = std::max_element(query_items.begin(), query_items.end());
 
-    UtilityFunctions::print("Is best filtered? ", best_score->is_filtered);
     return best_score->projection_position;
 }
 

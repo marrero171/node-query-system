@@ -55,7 +55,7 @@ void CQueryGenerator3D::perform_tests(vector<CQueryItem> &query_item_list)
     }
 }
 
-Dictionary CQueryGenerator3D::cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions, int col_mask = 1)
+Dictionary CQueryGenerator3D::cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions, int col_mask)
 {
     PhysicsDirectSpaceState3D *space_state = get_world_3d()->get_direct_space_state();
     Ref<PhysicsRayQueryParameters3D> query = PhysicsRayQueryParameters3D::create(start_pos, end_pos, col_mask);
