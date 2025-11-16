@@ -26,9 +26,14 @@ namespace godot
 
         virtual void perform_generation(vector<CQueryItem> &query_item_list) = 0;
         void perform_tests(vector<CQueryItem> &query_item_list);
+        Dictionary cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions, int col_mask = 1);
 
     private:
         RaycastMode raycast_mode = BODY;
+        // TODO: Check how many rays have been casted in total, cap it so it does a certain amount of rays per tick
+        // Since rays are the heaviest calculations by far I think
+        int casted_rays = 0;
+        int rays_per_tick = 1000;
     };
 
 }

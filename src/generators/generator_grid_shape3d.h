@@ -42,7 +42,6 @@ namespace godot
         void set_projection_collision_mask(int mask);
 
         void perform_generation(vector<CQueryItem> &query_item_list) override;
-        Dictionary cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions);
 
     private:
         // QueryGenerator

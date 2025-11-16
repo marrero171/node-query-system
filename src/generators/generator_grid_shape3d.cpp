@@ -1,9 +1,4 @@
 #include "generator_grid_shape3d.h"
-#include <godot_cpp/classes/physics_direct_space_state3d.hpp>
-#include <godot_cpp/classes/physics_ray_query_parameters3d.hpp>
-#include <godot_cpp/classes/world3d.hpp>
-#include <godot_cpp/classes/node3d.hpp>
-#include <godot_cpp/classes/collision_object3d.hpp>
 
 void CGeneratorGridShape3D::_bind_methods()
 {
@@ -177,7 +172,7 @@ void CGeneratorGridShape3D::perform_generation(vector<CQueryItem> &query_item_li
                 Vector3 ray_pos = Vector3(pos_x, starting_pos.y, pos_z);
                 Dictionary ray_result = cast_ray_projection(
                     ray_pos + (Vector3(0, 1, 0) * project_up),
-                    ray_pos + (Vector3(0, -1, 0) * project_down), contexts);
+                    ray_pos + (Vector3(0, -1, 0) * project_down), contexts, projection_collision_mask);
 
                 if (!ray_result.is_empty())
                 {
@@ -190,29 +185,4 @@ void CGeneratorGridShape3D::perform_generation(vector<CQueryItem> &query_item_li
             }
         }
     }
-}
-
-Dictionary CGeneratorGridShape3D::cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions)
-{
-    PhysicsDirectSpaceState3D *space_state = get_world_3d()->get_direct_space_state();
-    Ref<PhysicsRayQueryParameters3D> query = PhysicsRayQueryParameters3D::create(start_pos, end_pos, projection_collision_mask);
-
-    if (get_raycast_mode() == AREA)
-        query->set_collide_with_bodies(false);
-    if (get_raycast_mode() == AREA || get_raycast_mode() == BODY_AREA)
-        query->set_collide_with_areas(true);
-
-    Array exclusion_rids = Array();
-
-    // TODO: Figure out how to get the RIDs
-    for (Variant exclusion : exclusions)
-    {
-        CollisionObject3D *node = Object::cast_to<CollisionObject3D>(exclusion.operator Object *());
-        if (node == nullptr)
-            continue;
-        exclusion_rids.append(node->get_rid());
-    }
-    query->set_exclude(exclusion_rids);
-
-    return space_state->intersect_ray(query);
 }
