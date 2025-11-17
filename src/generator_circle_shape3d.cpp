@@ -1,4 +1,4 @@
-#include <generators/generator_circle_shape3d.h>
+#include "generator_circle_shape3d.h"
 
 void CGeneratorCircleShape3D::_bind_methods()
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "query_result.h"
 #include <godot_cpp/classes/node.hpp>
-#include <debug/geqo_debug_spheres.h>
+#include "query_result.h"
+#include "geqo_debug_spheres.h"
 #include <vector>
 using namespace godot;
 class CEnvironmentQuery : public Node
