@@ -1,5 +1,8 @@
 
 #pragma once
+#include <godot_cpp/variant/vector3.hpp>
+#include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/immediate_mesh.hpp>
 #include <godot_cpp/classes/mesh_instance3d.hpp>

@@ -1,4 +1,5 @@
 #pragma once
+#include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include "query_result.h"
 #include "geqo_debug_spheres.h"

@@ -1,5 +1,6 @@
 #pragma once
 #include <godot_cpp/classes/node3d.hpp>
+#include <godot_cpp/variant/array.hpp>
 #include "query_result.h"
 #include <vector>
 using namespace godot;

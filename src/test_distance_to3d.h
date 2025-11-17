@@ -2,6 +2,8 @@
 #include "query_test3d.h"
 #include "query_context3d.h"
 #include <godot_cpp/classes/curve.hpp>
+#include <godot_cpp/classes/ref.hpp>
+
 using namespace godot;
 class CTestDistanceTo3D : public CQueryTest3D
 {

@@ -1,4 +1,6 @@
 #pragma once
+#include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/variant/string.hpp>
 #include "query_context3d.h"
 using namespace godot;
 

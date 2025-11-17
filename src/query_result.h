@@ -1,5 +1,7 @@
 #pragma once
+#include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/variant/vector3.hpp>
 #include <vector>
 using namespace godot;
 

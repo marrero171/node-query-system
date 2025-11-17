@@ -1,4 +1,6 @@
 #pragma once
+#include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/variant/packed_vector3_array.hpp>
 #include <godot_cpp/classes/node3d.hpp>
 using namespace godot;
 class CQueryContext3D : public Node3D

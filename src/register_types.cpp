@@ -40,13 +40,13 @@ void initialize_geqo_module(ModuleInitializationLevel p_level)
     ClassDB::register_abstract_class<CQueryGenerator3D>();
     ClassDB::register_abstract_class<CQueryTest3D>();
 
-    // Contexts
-    ClassDB::register_class<CContextTargetNode3D>();
-    ClassDB::register_class<CContextInGroup3D>();
-
     // Generators
     ClassDB::register_class<CGeneratorGridShape3D>();
     ClassDB::register_class<CGeneratorCircleShape3D>();
+
+    // Contexts
+    ClassDB::register_class<CContextTargetNode3D>();
+    ClassDB::register_class<CContextInGroup3D>();
 
     // Tests
     ClassDB::register_class<CTestDistanceTo3D>();
