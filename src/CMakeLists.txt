@@ -40,7 +40,16 @@ STRING(TOLOWER "${PROJECT_NAME}.gdextension" GDEXTENSION_CONFIGURATION_FILE)
 STRING(TOLOWER ${PROJECT_NAME} GDEXTENSION_ENTRY_POINT)
 # Create GDExtension configuration file from our configuration template.
 CONFIGURE_FILE(gdextension.in ${GDEXTENSION_CONFIGURATION_FILE})
-# Specify runtime installation target (this is the actual library).
-INSTALL(TARGETS ${TARGET} CONFIGURATIONS Debug RUNTIME DESTINATION ${PROJECT_NAME})
-# Specify files installation target (this is the configuration file).
-INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/${GDEXTENSION_CONFIGURATION_FILE}" CONFIGURATIONS Release Debug DESTINATION ${PROJECT_NAME})
+# Install into addons/geqo/bin
+INSTALL(
+    TARGETS ${TARGET}
+    RUNTIME DESTINATION "addons/geqo/bin"
+    LIBRARY DESTINATION "addons/geqo/bin"
+    ARCHIVE DESTINATION "addons/geqo/bin"
+)
+
+# Install geqo.gdextension into addons/geqo
+INSTALL(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/${GDEXTENSION_CONFIGURATION_FILE}"
+    DESTINATION "addons/geqo"
+)

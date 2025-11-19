@@ -17,4 +17,4 @@ CGeneratorGridShape3D = "res://addons/geqo/icons/generator3d.svg"
 CGeneratorCircleShape3D = "res://addons/geqo/icons/generator3d.svg"
 
 [libraries]
-windows.64 = "@TARGET@.dll"
+windows.64 = "res://addons/geqo/bin/@TARGET@.dll"
