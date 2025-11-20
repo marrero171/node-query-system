@@ -16,6 +16,9 @@ env = SConscript("godot-cpp/SConstruct")
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")
 
+if env["target"] == "debug":
+    env.Append(CCFLAGS=["-g"])
+
 if env["platform"] == "macos":
     library = env.SharedLibrary(
         "project/addons/geqo/bin/geqo.{}.{}.framework/geqo.{}.{}".format(
