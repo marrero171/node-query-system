@@ -14,7 +14,7 @@
 #include "context_target_node3d.h"
 
 // Generators
-// #include "generator_circle_shape3d.h"
+#include "generator_circle_shape3d.h"
 #include "generator_grid_shape3d.h"
 
 // Tests
@@ -40,7 +40,7 @@ void initialize_geqo_module(ModuleInitializationLevel p_level) {
 
 	// Generators
 	ClassDB::register_class<CGeneratorGridShape3D>();
-	// ClassDB::register_class<CGeneratorCircleShape3D>();
+	ClassDB::register_class<CGeneratorCircleShape3D>();
 
 	// Contexts
 	ClassDB::register_class<CContextTargetNode3D>();
