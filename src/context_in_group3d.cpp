@@ -6,9 +6,9 @@ void CContextInGroup3D::set_group(String new_group) {
 }
 
 Array CContextInGroup3D::get_context() {
-	Array nodes = Array();
-	if (is_inside_tree())
-		Array nodes = get_tree()->get_nodes_in_group(group);
+	if (!is_inside_tree())
+		return Array();
+	Array nodes = get_tree()->get_nodes_in_group(group);
 	return nodes;
 }
 

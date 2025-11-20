@@ -26,12 +26,14 @@ void CTestRaycastTo3D::set_collision_mask(int mask) {
 }
 
 void CTestRaycastTo3D::perform_test(CQueryItem &projection) {
-	if (context == nullptr) {
+	if (!context) {
 		print_error("Test RaycastTo has no context");
+		return;
 	}
 	Array context_nodes = context->get_context();
 	// Make sure context only has 1 Node
 	if (context_nodes.is_empty() || context_nodes.size() > 1) {
+		print_error("Context nodes: ", context_nodes.size());
 		print_error("RaycastTo context should have 1 value, and 1 value only.");
 		return;
 	}
