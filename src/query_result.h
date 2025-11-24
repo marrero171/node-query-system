@@ -21,7 +21,7 @@ struct CQueryItem {
 		has_score = true;
 	}
 
-	bool operator<(const CQueryItem &item) const {
+	bool operator>(const CQueryItem &item) const {
 		// Non filtered items come before filtered items
 		if (is_filtered != item.is_filtered)
 			return !is_filtered;
@@ -34,16 +34,7 @@ struct CQueryItem {
 		if (!has_score)
 			return false;
 
-		return score < item.score;
-	}
-
-	CQueryItem &operator=(const CQueryItem &item) {
-		score = item.score;
-		is_filtered = item.is_filtered;
-		has_score = item.has_score;
-		projection_position = item.projection_position;
-		collided_with = item.collided_with;
-		return *this;
+		return score > item.score;
 	}
 };
 class CQueryResult : public RefCounted {
