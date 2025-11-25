@@ -9,8 +9,8 @@ class CGeneratorCircleShape3D : public CQueryGenerator3D {
 private:
 	// QueryGenerator
 	CQueryContext3D *circle_center = nullptr;
-	double circle_radius = 20.0;
-	double space_between = 5.0;
+	double circle_radius = 10.0;
+	double space_between = 1.0;
 
 	double arc_angle = 360.0;
 
@@ -19,7 +19,7 @@ private:
 	int cast_collision_mask = 1;
 
 	// Projection Data
-	bool use_vertical_projection = true;
+	bool use_vertical_projection = false;
 	double project_down = 100.0;
 	double project_up = 100.0;
 	double post_projection_vertical_offset = 0.0;

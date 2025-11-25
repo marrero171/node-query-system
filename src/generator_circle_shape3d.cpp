@@ -45,6 +45,65 @@ void CGeneratorCircleShape3D::set_projection_collision_mask(int mask) {
 }
 
 void CGeneratorCircleShape3D::perform_generation(std::vector<CQueryItem> &query_item_list) {
+	if (circle_center == nullptr) {
+		print_error("CircleShape circle_center context not found.");
+		return;
+	}
+	Array contexts = circle_center->get_context();
+
+	int points_amount = UtilityFunctions::roundi(circle_radius / space_between);
+
+	for (Variant &context : contexts) {
+		Vector3 starting_pos;
+		Node3D *context_ref = nullptr;
+
+		// TODO: Test if this doesn't crash for edge cases
+		if (context.get_type() == Variant::VECTOR3)
+			starting_pos = context;
+		else {
+			context_ref = Object::cast_to<Node3D>(context);
+			if (context_ref)
+				starting_pos = context_ref->get_global_position();
+		}
+
+		double previous_angle = 0.0;
+		float angle_step = Math_TAU / points_amount;
+
+		for (int point = 0; point < points_amount; point++) {
+			double pos_x = cos(previous_angle) * circle_radius + starting_pos.x;
+			double pos_z = sin(previous_angle) * circle_radius + starting_pos.z;
+
+			previous_angle += angle_step;
+
+			Vector3 final_pos = Vector3(pos_x, starting_pos.y, pos_z);
+
+			if (use_casting) {
+				Dictionary casted_ray = cast_ray_projection(starting_pos, final_pos, contexts, cast_collision_mask);
+				if (!casted_ray.is_empty())
+					final_pos = casted_ray.get("position", Vector3());
+			}
+
+			if (!use_vertical_projection) {
+				query_item_list.push_back(CQueryItem(final_pos));
+				continue;
+			}
+
+			Vector3 ray_pos = final_pos;
+
+			Dictionary ray_result = cast_ray_projection(
+					ray_pos + Vector3(0, 1, 0) * project_up,
+					ray_pos + Vector3(0, -1, 0) * project_down,
+					contexts,
+					projection_collision_mask);
+
+			if (!ray_result.is_empty()) {
+				Vector3 pos_result = ray_result.get("position", Vector3());
+				pos_result += Vector3(0, post_projection_vertical_offset, 0);
+				Node *collider = Object::cast_to<Node>(ray_result.get("collider", nullptr));
+				query_item_list.push_back(CQueryItem(pos_result, collider));
+			}
+		}
+	}
 }
 
 void CGeneratorCircleShape3D::_bind_methods() {
