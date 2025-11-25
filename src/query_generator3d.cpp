@@ -15,15 +15,13 @@ void CQueryGenerator3D::set_raycast_mode(RaycastMode mode) {
 
 void CQueryGenerator3D::perform_tests(std::vector<CQueryItem> &query_item_list) {
 	for (Variant test : get_children()) {
-		// TODO: Make sure generator only has QueryTest children
-		for (CQueryItem &query_item : query_item_list) {
-			CQueryTest3D *current_test = Object::cast_to<CQueryTest3D>(test);
-			if (current_test == nullptr) {
-				print_error("Invalid test, is this a QueryTest node?");
-				continue;
-			}
-			current_test->perform_test(query_item);
+		CQueryTest3D *current_test = Object::cast_to<CQueryTest3D>(test);
+		if (current_test == nullptr) {
+			print_error("Invalid test, is this a QueryTest node?");
+			continue;
 		}
+		for (CQueryItem &query_item : query_item_list)
+			current_test->perform_test(query_item);
 	}
 }
 

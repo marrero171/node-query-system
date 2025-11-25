@@ -67,14 +67,14 @@ void CGeneratorGridShape3D::perform_generation(std::vector<CQueryItem> &query_it
 
 				Vector3 ray_pos = Vector3(pos_x, starting_pos.y, pos_z);
 				Dictionary ray_result = cast_ray_projection(
-						ray_pos + (Vector3(0, 1, 0) * project_up),
-						ray_pos + (Vector3(0, -1, 0) * project_down), contexts, projection_collision_mask);
+						ray_pos + (Vector3(0, project_up, 0)),
+						ray_pos + (Vector3(0, -project_down, 0)), contexts, projection_collision_mask);
 
 				if (!ray_result.is_empty()) {
 					Vector3 casted_position = (Vector3)ray_result.get("position", Vector3());
-					// TODO: Get the collider also
+					Node3D *collider = Object::cast_to<Node3D>(ray_result.get("collider", nullptr));
 					query_item_list.push_back(
-							CQueryItem(casted_position + Vector3(0, 1, 0) * post_projection_vertical_offset));
+							CQueryItem(casted_position + Vector3(0, post_projection_vertical_offset, 0), collider));
 				}
 			}
 		}

@@ -91,8 +91,8 @@ void CGeneratorCircleShape3D::perform_generation(std::vector<CQueryItem> &query_
 			Vector3 ray_pos = final_pos;
 
 			Dictionary ray_result = cast_ray_projection(
-					ray_pos + Vector3(0, 1, 0) * project_up,
-					ray_pos + Vector3(0, -1, 0) * project_down,
+					ray_pos + Vector3(0, project_up, 0),
+					ray_pos + Vector3(0, -project_down, 0),
 					contexts,
 					projection_collision_mask);
 
