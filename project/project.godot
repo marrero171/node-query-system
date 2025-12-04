@@ -15,10 +15,6 @@ run/main_scene="uid://bep8vp2474roh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-GEQODebugSpheres="*res://addons/geqo/./debug/debug_sphere.gd"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/geqo/plugin.cfg")
