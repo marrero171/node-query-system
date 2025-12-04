@@ -15,6 +15,8 @@ Vector3 GEQODebugSpheres::_sphere_point(double radius, double phi, double theta)
 
 void GEQODebugSpheres::draw_items(vector<QueryItem> &query_items_list, double time_to_destroy) {
 	// TODO: MAX_MESH_SURFACES prevents drawing more circles
+	if (immediate_mesh == nullptr)
+		return;
 	immediate_mesh->clear_surfaces();
 	remove_labels();
 

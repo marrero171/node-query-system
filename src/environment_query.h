@@ -9,7 +9,7 @@ class EnvironmentQuery : public Node {
 	GDCLASS(EnvironmentQuery, Node)
 
 private:
-	bool use_debug_shapes = false;
+	//bool use_debug_shapes = false;
 	std::vector<QueryItem> query_items;
 	GEQODebugSpheres *debug_spheres = nullptr;
 
@@ -17,8 +17,8 @@ public:
 	EnvironmentQuery() {}
 	~EnvironmentQuery() {}
 
-	void set_use_debug_shapes(const bool use_debug);
-	bool get_use_debug_shapes() const { return use_debug_shapes; }
+	//void set_use_debug_shapes(const bool use_debug);
+	//bool get_use_debug_shapes() const { return use_debug_shapes; }
 
 	void _ready() override;
 
