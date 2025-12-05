@@ -25,8 +25,8 @@ macos.release = "res://addons/geqo/bin/libgeqo.macos.template_release.framework"
 ios.debug = "res://addons/geqo/bin/libgeqo.ios.template_debug.xcframework"
 ios.release = "res://addons/geqo/bin/libgeqo.ios.template_release.xcframework"
 
-windows.debug.x86_64 = "res://addons/geqo/bin/libgeqo.windows.template_debug.x86_64.dll"
-windows.release.x86_64 = "res://addons/geqo/bin/libgeqo.windows.template_release.x86_64.dll"
+windows.debug.x86_64 = "res://addons/geqo/bin/geqo.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/geqo/bin/geqo.windows.template_release.x86_64.dll"
 
 linux.debug.x86_64 = "res://addons/geqo/bin/libgeqo.linux.template_debug.x86_64.so"
 linux.release.x86_64 = "res://addons/geqo/bin/libgeqo.linux.template_release.x86_64.so"
