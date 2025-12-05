@@ -82,13 +82,18 @@ jobs:
         run: |
           Remove-Item project/addons/geqo/bin/* -Include *.exp,*.lib,*.pdb -Force
 
+      - name: Include Files
+        shell: sh
+        run: |
+          cp '${{ github.workspace }}/README.md' '${{ github.workspace }}/LICENSE.txt' ${{ github.workspace }}/project/addons/geqo/
+
       # Upload the build
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: geqo-${{ matrix.target.platform }}-${{ matrix.target.arch }}-${{ matrix.float-precision }}-${{ matrix.target-type }}
           path: |
-            ${{ github.workspace }}/project/addons/geqo/bin/**
+            ${{ github.workspace }}/project/
 
   # Merges all the build artifacts together into a single godot-cpp-template artifact.
   # If you comment out this step, all the builds will be uploaded individually.
@@ -99,6 +104,7 @@ jobs:
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: geqo
+          include-hidden-files: true
+          name: ${{ github.event.repository.name }}
           pattern: geqo-*
           delete-merged: true
