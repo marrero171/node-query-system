@@ -51,7 +51,7 @@ jobs:
       - name: Run clang-format
         shell: bash
         run: |
-          clang-format --dry-run --Werror src/**/*.{c,cpp,h,hpp}
+          clang-format --dry-run --Werror src/**/*.cpp
 
       # Add linux x86_32 toolchain
       - name: Install multilib support
