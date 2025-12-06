@@ -2,25 +2,25 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "query_context3d.h"
-#include "query_generator3d.h"
+#include "contexts/query_context3d.h"
+#include "generators/query_generator3d.h"
 #include "query_result.h"
-#include "query_test3d.h"
+#include "tests/query_test3d.h"
 
+#include "debug/geqo_debug_spheres.h"
 #include "environment_query.h"
-#include "geqo_debug_spheres.h"
 // Contexts
-#include "context_in_group3d.h"
-#include "context_target_node3d.h"
+#include "contexts/context_in_group3d.h"
+#include "contexts/context_target_node3d.h"
 
 // Generators
-#include "generator_circle_shape3d.h"
-#include "generator_grid_shape3d.h"
+#include "generators/generator_circle_shape3d.h"
+#include "generators/generator_grid_shape3d.h"
 
 // Tests
-#include "test_distance_to3d.h"
-#include "test_dot_product3d.h"
-#include "test_raycast_to3d.h"
+#include "tests/test_distance_to3d.h"
+#include "tests/test_dot_product3d.h"
+#include "tests/test_raycast_to3d.h"
 
 #include "register_types.h"
 

@@ -1,4 +1,4 @@
-#include "query_test3d.h"
+#include "tests/query_test3d.h"
 
 void QueryTest3D::set_test_purpose(const TestPurpose purpose) {
 	test_purpose = purpose;

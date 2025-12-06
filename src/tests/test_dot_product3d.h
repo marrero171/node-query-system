@@ -1,6 +1,6 @@
 #pragma once
-#include "query_context3d.h"
-#include "query_test3d.h"
+#include "contexts/query_context3d.h"
+#include "tests/query_test3d.h"
 using namespace godot;
 class TestDotProduct3D : public QueryTest3D {
 	GDCLASS(TestDotProduct3D, QueryTest3D)

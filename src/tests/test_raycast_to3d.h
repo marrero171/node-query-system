@@ -1,6 +1,6 @@
 #pragma once
-#include "query_context3d.h"
-#include "query_test3d.h"
+#include "contexts/query_context3d.h"
+#include "tests/query_test3d.h"
 #include <godot_cpp/classes/collision_object3d.hpp>
 #include <godot_cpp/classes/curve.hpp>
 #include <godot_cpp/variant/node_path.hpp>

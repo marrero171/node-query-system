@@ -1,4 +1,4 @@
-#include "test_distance_to3d.h"
+#include "tests/test_distance_to3d.h"
 #include <algorithm>
 #include <godot_cpp/classes/engine.hpp>
 #include <numeric>

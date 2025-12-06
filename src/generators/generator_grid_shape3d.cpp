@@ -1,4 +1,4 @@
-#include "generator_grid_shape3d.h"
+#include "generators/generator_grid_shape3d.h"
 
 void GeneratorGridShape3D::set_grid_half_size(double size) {
 	grid_half_size = size;

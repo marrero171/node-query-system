@@ -1,5 +1,5 @@
-#include "query_generator3d.h"
-#include "query_test3d.h"
+#include "generators/query_generator3d.h"
+#include "tests/query_test3d.h"
 #include <godot_cpp/classes/collision_object3d.hpp>
 #include <godot_cpp/classes/node3d.hpp>
 #include <godot_cpp/classes/physics_direct_space_state3d.hpp>

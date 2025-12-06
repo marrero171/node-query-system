@@ -1,36 +1,51 @@
 #pragma once
-#include "query_context3d.h"
-#include "query_generator3d.h"
+#include "contexts/query_context3d.h"
+#include "generators/query_generator3d.h"
 #include <vector>
 using namespace godot;
-class GeneratorGridShape3D : public QueryGenerator3D {
-	GDCLASS(GeneratorGridShape3D, QueryGenerator3D)
+class GeneratorCircleShape3D : public QueryGenerator3D {
+	GDCLASS(GeneratorCircleShape3D, QueryGenerator3D)
 
 private:
 	// QueryGenerator
-	double grid_half_size = 20.0;
-	double space_between = 5.0;
-	QueryContext3D *generate_around = nullptr;
+	QueryContext3D *circle_center = nullptr;
+	double circle_radius = 10.0;
+	double space_between = 1.0;
+
+	double arc_angle = 360.0;
+
+	// Cast Data
+	bool use_casting = true;
+	int cast_collision_mask = 1;
 
 	// Projection Data
-	bool use_vertical_projection = true;
+	bool use_vertical_projection = false;
 	double project_down = 100.0;
 	double project_up = 100.0;
 	double post_projection_vertical_offset = 0.0;
 	int projection_collision_mask = 1;
 
 public:
-	GeneratorGridShape3D() {}
-	~GeneratorGridShape3D() {}
+	GeneratorCircleShape3D() {}
+	~GeneratorCircleShape3D() {}
 
-	void set_grid_half_size(double size);
-	double get_grid_half_size() const { return grid_half_size; }
+	void set_circle_center(QueryContext3D *context);
+	QueryContext3D *get_circle_center() { return circle_center; }
+
+	void set_circle_radius(double radius);
+	double get_circle_radius() const { return circle_radius; }
 
 	void set_space_between(double space);
 	double get_space_between() const { return space_between; }
 
-	void set_generate_around(QueryContext3D *context);
-	QueryContext3D *get_generate_around() { return generate_around; }
+	void set_arc_angle(double angle);
+	double get_arc_angle() const { return arc_angle; }
+
+	void set_use_casting(bool use);
+	bool get_use_casting() const { return use_casting; }
+
+	void set_cast_collision_mask(int mask);
+	int get_cast_collision_mask() const { return cast_collision_mask; }
 
 	void set_use_vertical_projection(bool use);
 	bool get_use_vertical_projection() const { return use_vertical_projection; }

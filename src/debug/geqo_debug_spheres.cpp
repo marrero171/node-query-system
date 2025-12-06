@@ -1,4 +1,4 @@
-#include "geqo_debug_spheres.h"
+#include "debug/geqo_debug_spheres.h"
 #include <godot_cpp/classes/label3d.hpp>
 #include <godot_cpp/classes/standard_material3d.hpp>
 #include <godot_cpp/variant/color_names.inc.hpp>

@@ -1,5 +1,5 @@
 #include "environment_query.h"
-#include "query_generator3d.h"
+#include "generators/query_generator3d.h"
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/core/class_db.hpp>

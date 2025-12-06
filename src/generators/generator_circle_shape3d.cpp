@@ -1,4 +1,4 @@
-#include "generator_circle_shape3d.h"
+#include "generators/generator_circle_shape3d.h"
 
 void GeneratorCircleShape3D::set_circle_center(QueryContext3D *context) {
 	circle_center = context;

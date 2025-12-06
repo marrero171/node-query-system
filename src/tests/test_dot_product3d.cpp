@@ -1,4 +1,4 @@
-#include "test_dot_product3d.h"
+#include "tests/test_dot_product3d.h"
 
 void TestDotProduct3D::set_min_value(double value) {
 	min_value = value;

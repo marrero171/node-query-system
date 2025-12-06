@@ -12,9 +12,17 @@ env = SConscript("godot-cpp/SConstruct")
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
 
+def recursive_glob(rootdir, pattern):
+    matches = []
+    for root, dirnames, filenames in os.walk(rootdir):
+        for filename in filenames:
+            if filename.endswith(pattern):
+                matches.append(os.path.join(root, filename))
+    return matches
+
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 env.Append(CPPPATH=["src/"])
-sources = Glob("src/*.cpp")
+sources = recursive_glob('src', '.cpp')
 
 if env["target"] == "debug":
     env.Append(CCFLAGS=["-g"])

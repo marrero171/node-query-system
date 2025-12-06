@@ -54,6 +54,7 @@ test_purpose = 1
 
 [node name="TestDistanceTo3D2" type="TestDistanceTo3D" parent="EnvironmentQuery/GeneratorGridShape3D" node_paths=PackedStringArray("distance_to")]
 distance_to = NodePath("../../../Contexts/ContextSelf")
+max_distance = 15.0
 scoring_curve = SubResource("Curve_5bnyk")
 test_purpose = 2
 
