@@ -53,9 +53,9 @@ void EnvironmentQuery::set_is_querying(const bool querying) {
 }
 
 void EnvironmentQuery::request_query() {
-	UtilityFunctions::print("EnvironmentQuery::request_query(): Requested a new query.");
+	// UtilityFunctions::print("EnvironmentQuery::request_query(): Requested a new query.");
 	if (is_querying) {
-		print_error("EnvironmentQuery::request_query(): Requested another query while processing.");
+		// print_error("EnvironmentQuery::request_query(): Requested another query while processing.");
 		return;
 	}
 	_start_query();
@@ -64,7 +64,7 @@ void EnvironmentQuery::request_query() {
 void EnvironmentQuery::_start_query() {
 	// Reset all values before processing the query
 	_current_generator = 0;
-	UtilityFunctions::print(vformat("Previous vector size: %s", query_items.size()));
+	// UtilityFunctions::print(vformat("Previous vector size: %s", query_items.size()));
 	query_items.clear();
 
 	_initial_time_usec = Time::get_singleton()->get_ticks_usec();

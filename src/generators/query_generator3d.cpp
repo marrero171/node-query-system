@@ -17,15 +17,14 @@ void QueryGenerator3D::set_raycast_mode(RaycastMode mode) {
 	raycast_mode = mode;
 }
 
-void QueryGenerator3D::perform_tests(std::vector<QueryItem> &query_item_list) {
+void QueryGenerator3D::perform_tests(int current_item) {
 	for (Variant test : get_children()) {
 		QueryTest3D *current_test = Object::cast_to<QueryTest3D>(test);
 		if (current_test == nullptr) {
 			print_error("Invalid test, is this a QueryTest node?");
 			continue;
 		}
-		for (QueryItem &query_item : query_item_list)
-			current_test->perform_test(query_item);
+		current_test->perform_test(get_query_items_ref()[current_item]);
 	}
 }
 

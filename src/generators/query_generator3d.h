@@ -32,7 +32,7 @@ public:
 	RaycastMode get_raycast_mode() const { return raycast_mode; }
 
 	virtual void perform_generation(uint64_t initial_time_usec, int time_budget_ms) = 0;
-	void perform_tests(std::vector<QueryItem> &query_item_list);
+	void perform_tests(int current_item);
 	Dictionary cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions, int col_mask = 1);
 	bool has_time_left(uint64_t initial_time_usec, uint64_t current_time_usec, int time_budget_ms);
 
