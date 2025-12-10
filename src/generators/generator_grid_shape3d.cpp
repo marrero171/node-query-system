@@ -77,12 +77,13 @@ void GeneratorGridShape3D::perform_generation(uint64_t initial_time_usec, int ti
 					Node3D *collider = Object::cast_to<Node3D>(ray_result.get("collider", nullptr));
 					get_query_items_ref().push_back(
 							QueryItem(casted_position + Vector3(0, post_projection_vertical_offset, 0), collider));
+					perform_tests(get_query_items_ref().size() - 1);
 
 					// Check the time for stopping
 					uint64_t current_time_usec = Time::get_singleton()->get_ticks_usec();
 
 					if (!has_time_left(initial_time_usec, current_time_usec, time_budget_ms)) {
-						UtilityFunctions::print("No time left, continue to next frame.");
+						// UtilityFunctions::print("No time left, continue to next frame.");
 						// Stop and wait until next frame
 						_current_state.prev_context = context;
 						_current_state.prev_x = x;
@@ -101,7 +102,7 @@ void GeneratorGridShape3D::perform_generation(uint64_t initial_time_usec, int ti
 }
 
 void GeneratorGridShape3D::_on_next_process_frame() {
-	UtilityFunctions::print("Next process frame called.");
+	//UtilityFunctions::print("Next process frame called.");
 	uint64_t initial_time_usec = Time::get_singleton()->get_ticks_usec();
 	perform_generation(initial_time_usec, _current_state.time_budget_ms);
 }
