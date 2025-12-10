@@ -19,25 +19,22 @@ public:
 
 private:
 	RaycastMode raycast_mode = BODY;
-	// TODO: Check how many rays have been casted in total, cap it so it does a certain amount of rays per tick
-	// Since rays are the heaviest calculations by far I think
-	int casted_rays = 0;
-	int rays_per_tick = 1000;
+	std::vector<QueryItem> *query_items_ref = nullptr;
 
 public:
 	QueryGenerator3D() {}
 	~QueryGenerator3D() {}
 
-	void add_ray_tick();
-	int get_rays_per_tick() { return rays_per_tick; };
+	void set_query_items_ref(std::vector<QueryItem> &query_items) { query_items_ref = &query_items; }
+	std::vector<QueryItem> &get_query_items_ref() { return *query_items_ref; }
 
 	void set_raycast_mode(RaycastMode mode);
 	RaycastMode get_raycast_mode() const { return raycast_mode; }
 
-	virtual void perform_generation(std::vector<QueryItem> &query_item_list) = 0;
-	bool _process_generation(uint64_t initial_time, int time_budget);
+	virtual void perform_generation(uint64_t initial_time_usec, int time_budget_ms) = 0;
 	void perform_tests(std::vector<QueryItem> &query_item_list);
 	Dictionary cast_ray_projection(Vector3 start_pos, Vector3 end_pos, Array exclusions, int col_mask = 1);
+	bool has_time_left(uint64_t initial_time_usec, uint64_t current_time_usec, int time_budget_ms);
 
 protected:
 	static void _bind_methods();

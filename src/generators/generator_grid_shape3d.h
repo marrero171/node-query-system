@@ -3,6 +3,18 @@
 #include "generators/query_generator3d.h"
 #include <vector>
 using namespace godot;
+struct GridShapeState {
+	int time_budget_ms = 0;
+	int prev_z = 0;
+	int prev_x = 0;
+	int prev_context = 0;
+
+	void reset() {
+		prev_z = 0;
+		prev_x = 0;
+		prev_context = 0;
+	}
+};
 class GeneratorGridShape3D : public QueryGenerator3D {
 	GDCLASS(GeneratorGridShape3D, QueryGenerator3D)
 
@@ -18,6 +30,7 @@ private:
 	double project_up = 100.0;
 	double post_projection_vertical_offset = 0.0;
 	int projection_collision_mask = 1;
+	GridShapeState _current_state = GridShapeState();
 
 public:
 	GeneratorGridShape3D() {}
@@ -47,7 +60,8 @@ public:
 	void set_projection_collision_mask(int mask);
 	int get_projection_collision_mask() const { return projection_collision_mask; }
 
-	void perform_generation(std::vector<QueryItem> &query_item_list) override;
+	void perform_generation(uint64_t initial_time_usec, int time_budget_ms) override;
+	void _on_next_process_frame();
 
 protected:
 	static void _bind_methods();

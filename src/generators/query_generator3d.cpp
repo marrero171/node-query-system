@@ -17,10 +17,6 @@ void QueryGenerator3D::set_raycast_mode(RaycastMode mode) {
 	raycast_mode = mode;
 }
 
-bool QueryGenerator3D::_process_generation(uint64_t initial_time, int time_budget) {
-	return false;
-}
-
 void QueryGenerator3D::perform_tests(std::vector<QueryItem> &query_item_list) {
 	for (Variant test : get_children()) {
 		QueryTest3D *current_test = Object::cast_to<QueryTest3D>(test);
@@ -55,9 +51,19 @@ Dictionary QueryGenerator3D::cast_ray_projection(Vector3 start_pos, Vector3 end_
 	return space_state->intersect_ray(query);
 }
 
+bool QueryGenerator3D::has_time_left(uint64_t initial_time_usec, uint64_t current_time_usec, int time_budget_ms) {
+	double time_spent_ms = (current_time_usec - initial_time_usec) / 1000;
+	if (time_spent_ms < time_budget_ms)
+		return true;
+	else
+		return false;
+}
+
 void QueryGenerator3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_raycast_mode"), &QueryGenerator3D::get_raycast_mode);
 	ClassDB::bind_method(D_METHOD("set_raycast_mode", "mode"), &QueryGenerator3D::set_raycast_mode);
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "raycast_mode", PROPERTY_HINT_ENUM, "Body, Area, Body Area"), "set_raycast_mode", "get_raycast_mode");
+
+	ADD_SIGNAL(MethodInfo("generator_finished"));
 }

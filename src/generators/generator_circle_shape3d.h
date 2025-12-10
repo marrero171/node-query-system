@@ -3,6 +3,15 @@
 #include "generators/query_generator3d.h"
 #include <vector>
 using namespace godot;
+struct CircleShapeState {
+	int prev_point = 0;
+	int prev_context = 0;
+
+	void reset() {
+		prev_point = 0;
+		prev_context = 0;
+	}
+};
 class GeneratorCircleShape3D : public QueryGenerator3D {
 	GDCLASS(GeneratorCircleShape3D, QueryGenerator3D)
 
@@ -24,6 +33,8 @@ private:
 	double project_up = 100.0;
 	double post_projection_vertical_offset = 0.0;
 	int projection_collision_mask = 1;
+
+	CircleShapeState _current_state = CircleShapeState();
 
 public:
 	GeneratorCircleShape3D() {}
@@ -62,7 +73,7 @@ public:
 	void set_projection_collision_mask(int mask);
 	int get_projection_collision_mask() const { return projection_collision_mask; }
 
-	void perform_generation(std::vector<QueryItem> &query_item_list) override;
+	void perform_generation(uint64_t initial_time_usec, int time_budget_ms) override;
 
 protected:
 	static void _bind_methods();
