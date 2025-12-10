@@ -15,7 +15,10 @@ var current_target
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("request_query"):
 		var time_start: float = Time.get_ticks_usec()
-		var query_result: QueryResult = env_query.request_query()
+		env_query.request_query()
+		await env_query.query_finished
+		print(env_query.has_method("get_result"))
+		var query_result: QueryResult = env_query.get_result()
 		var time_end: float = Time.get_ticks_usec()
 		print("C++ Query ended in : " + str(((time_end - time_start) / 1000)) + " ms")
 		final_target = query_result.get_highest_score_position()

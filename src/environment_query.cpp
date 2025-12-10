@@ -23,28 +23,25 @@ void EnvironmentQuery::_notification(int p_what) {
 			}
 			init_generators();
 		} break;
-		case NOTIFICATION_PROCESS: {
-			if (Engine::get_singleton()->is_editor_hint())
-				return;
-			if (is_querying) {
-				if (_process_query()) {
-					// Query finished with true so don't query anymore
-					is_querying = false;
-				}
-			}
-		} break;
 	}
 }
 
 void EnvironmentQuery::init_generators() {
+	UtilityFunctions::print("Initializing generators.");
 	for (Variant child : get_children()) {
 		QueryGenerator3D *generator = cast_to<QueryGenerator3D>(child);
 		if (!generator) {
 			print_error("EnvironmentQuery::init_generators(): Child is not a Generator");
 			continue;
 		}
+		generator->set_query_items_ref(query_items);
+		generator->connect("generator_finished", callable_mp(this, &EnvironmentQuery::_on_generator_finished));
 		generators.push_back(generator);
 	}
+}
+
+Ref<QueryResult> EnvironmentQuery::get_result() {
+	return stored_result;
 }
 
 void EnvironmentQuery::set_time_budget_ms(const double budget) {
@@ -56,41 +53,47 @@ void EnvironmentQuery::set_is_querying(const bool querying) {
 }
 
 void EnvironmentQuery::request_query() {
-	if (is_querying)
+	UtilityFunctions::print("EnvironmentQuery::request_query(): Requested a new query.");
+	if (is_querying) {
 		print_error("EnvironmentQuery::request_query(): Requested another query while processing.");
-	return;
+		return;
+	}
 	_start_query();
 }
 
 void EnvironmentQuery::_start_query() {
 	// Reset all values before processing the query
 	_current_generator = 0;
-	_current_test = 0;
+	UtilityFunctions::print(vformat("Previous vector size: %s", query_items.size()));
 	query_items.clear();
 
 	_initial_time_usec = Time::get_singleton()->get_ticks_usec();
 	is_querying = true;
+	_process_query();
 }
 
-bool EnvironmentQuery::_process_query() {
-	for (int gen = _current_generator; gen < generators.size(); gen++) {
-		if (!generators[gen]) {
-			print_error("EnvironmentQuery: Child is not Generator");
-			continue;
+void EnvironmentQuery::_process_query() {
+	generators[_current_generator]->perform_generation(_initial_time_usec, time_budget_ms);
+}
+
+void EnvironmentQuery::_on_generator_finished() {
+	_current_generator++;
+	if (_current_generator >= generators.size()) {
+		Ref<QueryResult> result;
+		result.instantiate();
+		result->set_items(query_items);
+		stored_result = result;
+		emit_signal("query_finished", result);
+		if (debug_spheres) {
+			debug_spheres->draw_items(query_items);
 		}
-		generators[gen]->perform_generation(query_items);
-		generators[gen]->perform_tests(query_items);
+		UtilityFunctions::print("Finished Query.");
+		is_querying = false;
+		return;
 	}
 
-	Ref<QueryResult> result;
-	result.instantiate();
-	result->set_items(query_items);
-
-	if (debug_spheres) {
-		debug_spheres->draw_items(query_items);
-	}
-	emit_signal("query_finished", result);
-	return true;
+	// Continue to the next generator/tests
+	_process_query();
 }
 
 void EnvironmentQuery::_bind_methods() {
@@ -98,7 +101,8 @@ void EnvironmentQuery::_bind_methods() {
 	//ClassDB::bind_method(D_METHOD("set_use_debug_shapes", "use_debug"), &EnvironmentQuery::set_use_debug_shapes);
 
 	ClassDB::bind_method(D_METHOD("request_query"), &EnvironmentQuery::request_query);
+	ClassDB::bind_method(D_METHOD("get_result"), &EnvironmentQuery::get_result);
 
 	//ADD_PROPERTY(PropertyInfo(Variant::BOOL, "use_debug_shapes"), "set_use_debug_shapes", "get_use_debug_shapes");
-	ADD_SIGNAL(MethodInfo("query_finished", PropertyInfo(Variant::OBJECT, "result")));
+	ADD_SIGNAL(MethodInfo("query_finished", PropertyInfo(Variant::OBJECT, "result", PROPERTY_HINT_RESOURCE_TYPE, "QueryResult")));
 }

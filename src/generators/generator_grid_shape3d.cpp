@@ -1,4 +1,6 @@
 #include "generators/generator_grid_shape3d.h"
+#include "godot_cpp/classes/scene_tree.hpp"
+#include "godot_cpp/classes/time.hpp"
 
 void GeneratorGridShape3D::set_grid_half_size(double size) {
 	grid_half_size = size;
@@ -32,7 +34,7 @@ void GeneratorGridShape3D::set_projection_collision_mask(int mask) {
 	projection_collision_mask = mask;
 }
 
-void GeneratorGridShape3D::perform_generation(std::vector<QueryItem> &query_item_list) {
+void GeneratorGridShape3D::perform_generation(uint64_t initial_time_usec, int time_budget_ms) {
 	if (generate_around == nullptr) {
 		print_error("Generator couldn't find Context");
 		return;
@@ -40,12 +42,12 @@ void GeneratorGridShape3D::perform_generation(std::vector<QueryItem> &query_item
 	int grid_size = std::round(grid_half_size * 2 / space_between) + 1;
 	Array contexts = generate_around->get_context();
 
-	for (Variant context : contexts) {
+	for (int context = _current_state.prev_context; context < contexts.size(); context++) {
 		Vector3 starting_pos;
-		if (context.get_type() == Variant::VECTOR3)
-			starting_pos = context;
+		if (contexts[context].get_type() == Variant::VECTOR3)
+			starting_pos = contexts[context];
 		else {
-			Node3D *current_context = Object::cast_to<Node3D>(context);
+			Node3D *current_context = Object::cast_to<Node3D>(contexts[context]);
 			if (current_context == nullptr) {
 				print_error("Context is invalid, must be Node3D");
 				continue;
@@ -55,13 +57,13 @@ void GeneratorGridShape3D::perform_generation(std::vector<QueryItem> &query_item
 		starting_pos.x -= grid_half_size;
 		starting_pos.z -= grid_half_size;
 
-		for (int z = 0; z < grid_size; z++) {
-			for (int x = 0; x < grid_size; x++) {
+		for (int z = _current_state.prev_z; z < grid_size; z++) {
+			for (int x = _current_state.prev_x; x < grid_size; x++) {
 				double pos_x = starting_pos.x + (x * space_between);
 				double pos_z = starting_pos.z + (z * space_between);
 
 				if (!use_vertical_projection) {
-					query_item_list.push_back(QueryItem(Vector3(pos_x, starting_pos.y, pos_z)));
+					get_query_items_ref().push_back(QueryItem(Vector3(pos_x, starting_pos.y, pos_z)));
 					continue;
 				}
 
@@ -73,12 +75,35 @@ void GeneratorGridShape3D::perform_generation(std::vector<QueryItem> &query_item
 				if (!ray_result.is_empty()) {
 					Vector3 casted_position = (Vector3)ray_result.get("position", Vector3());
 					Node3D *collider = Object::cast_to<Node3D>(ray_result.get("collider", nullptr));
-					query_item_list.push_back(
+					get_query_items_ref().push_back(
 							QueryItem(casted_position + Vector3(0, post_projection_vertical_offset, 0), collider));
+
+					// Check the time for stopping
+					uint64_t current_time_usec = Time::get_singleton()->get_ticks_usec();
+
+					if (!has_time_left(initial_time_usec, current_time_usec, time_budget_ms)) {
+						UtilityFunctions::print("No time left, continue to next frame.");
+						// Stop and wait until next frame
+						_current_state.prev_context = context;
+						_current_state.prev_x = x;
+						_current_state.prev_z = z;
+						_current_state.time_budget_ms = time_budget_ms;
+						get_tree()->connect("process_frame", callable_mp(this, &GeneratorGridShape3D::_on_next_process_frame), CONNECT_ONE_SHOT);
+						return;
+					}
 				}
 			}
 		}
 	}
+	// Finished the generation, continue on, and reset the state
+	emit_signal("generator_finished");
+	_current_state.reset();
+}
+
+void GeneratorGridShape3D::_on_next_process_frame() {
+	UtilityFunctions::print("Next process frame called.");
+	uint64_t initial_time_usec = Time::get_singleton()->get_ticks_usec();
+	perform_generation(initial_time_usec, _current_state.time_budget_ms);
 }
 
 void GeneratorGridShape3D::_bind_methods() {

@@ -20,8 +20,8 @@ private:
 	bool is_querying = false;
 
 	int _current_generator = 0;
-	int _current_test = 0;
 	uint64_t _initial_time_usec = 0;
+	Ref<QueryResult> stored_result;
 
 public:
 	EnvironmentQuery() {}
@@ -31,6 +31,7 @@ public:
 
 	//void set_use_debug_shapes(const bool use_debug);
 	//bool get_use_debug_shapes() const { return use_debug_shapes; }
+	Ref<QueryResult> get_result();
 
 	void set_time_budget_ms(const double budget);
 	double get_time_budget_ms() const { return time_budget_ms; }
@@ -40,7 +41,8 @@ public:
 
 	void request_query();
 	void _start_query();
-	bool _process_query();
+	void _process_query();
+	void _on_generator_finished();
 
 protected:
 	static void _bind_methods();
