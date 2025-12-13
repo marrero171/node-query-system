@@ -47,6 +47,11 @@ void QueryResultBase<VectorT>::_build_cache() const {
 	is_cache_built = true;
 }
 
+void QueryResult2D::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_highest_score_position"), &QueryResult2D::get_highest_score_position);
+	ClassDB::bind_method(D_METHOD("get_highest_score_node"), &QueryResult2D::get_highest_score_node);
+}
+
 void QueryResult3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_highest_score_position"), &QueryResult3D::get_highest_score_position);
 	ClassDB::bind_method(D_METHOD("get_highest_score_node"), &QueryResult3D::get_highest_score_node);

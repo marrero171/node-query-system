@@ -57,6 +57,17 @@ public:
 	Node *_get_highest_score_node() const;
 };
 
+class QueryResult2D : public RefCounted, public QueryResultBase<Vector2> {
+	GDCLASS(QueryResult2D, RefCounted)
+
+protected:
+	static void _bind_methods();
+
+public:
+	Vector2 get_highest_score_position() const { return _get_highest_score_position(); };
+	Node *get_highest_score_node() const { return _get_highest_score_node(); };
+};
+
 class QueryResult3D : public RefCounted, public QueryResultBase<Vector3> {
 	GDCLASS(QueryResult3D, RefCounted)
 
