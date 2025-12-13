@@ -2,12 +2,21 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "contexts/query_context2d.h"
 #include "contexts/query_context3d.h"
+
+#include "generators/query_generator2d.h"
 #include "generators/query_generator3d.h"
+
 #include "query_result.h"
+
+#include "tests/query_test2d.h"
 #include "tests/query_test3d.h"
 
+#include "debug/geqo_debug_spheres2d.h"
 #include "debug/geqo_debug_spheres3d.h"
+
+#include "environment_query2d.h"
 #include "environment_query3d.h"
 // Contexts
 #include "contexts/context_in_group3d.h"
@@ -31,11 +40,22 @@ void initialize_geqo_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
+	ClassDB::register_class<GEQODebugSpheres2D>();
 	ClassDB::register_class<GEQODebugSpheres3D>();
+
+	ClassDB::register_class<QueryResult2D>();
 	ClassDB::register_class<QueryResult3D>();
+
+	ClassDB::register_class<EnvironmentQuery2D>();
 	ClassDB::register_class<EnvironmentQuery3D>();
+
+	ClassDB::register_abstract_class<QueryContext2D>();
 	ClassDB::register_abstract_class<QueryContext3D>();
+
+	ClassDB::register_abstract_class<QueryGenerator2D>();
 	ClassDB::register_abstract_class<QueryGenerator3D>();
+
+	ClassDB::register_abstract_class<QueryTest2D>();
 	ClassDB::register_abstract_class<QueryTest3D>();
 
 	// Generators
