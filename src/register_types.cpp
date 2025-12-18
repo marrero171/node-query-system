@@ -30,6 +30,7 @@
 #include "generators/generator_circle_shape3d.h"
 #include "generators/generator_grid_shape2d.h"
 #include "generators/generator_grid_shape3d.h"
+#include "generators/generator_in_group2d.h"
 #include "generators/generator_in_group3d.h"
 
 // Tests
@@ -77,6 +78,7 @@ void initialize_geqo_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<GeneratorCircleShape2D>();
 	ClassDB::register_class<GeneratorCircleShape3D>();
 
+	ClassDB::register_class<GeneratorInGroup2D>();
 	ClassDB::register_class<GeneratorInGroup3D>();
 
 	// Contexts
